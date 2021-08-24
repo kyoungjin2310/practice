@@ -81,7 +81,7 @@ export const webToonList = [
     mViews: 12000,
     day: "월",
     type: ["스토리", "판타지"],
-    date: "2021-08-23",
+    date: "2021-08-02",
     active: false,
   },
   {
@@ -94,7 +94,7 @@ export const webToonList = [
     mViews: 2000,
     day: "화",
     type: ["스토리", "로맨스"],
-    date: "2021-08-24",
+    date: "2021-08-03",
     active: false,
   },
   {
@@ -107,7 +107,7 @@ export const webToonList = [
     mViews: 3000,
     day: "수",
     type: ["에피소드", "개그"],
-    date: "2021-08-17",
+    date: "2021-08-04",
     active: false,
   },
   {
@@ -120,7 +120,7 @@ export const webToonList = [
     mViews: 1000,
     day: "목",
     type: ["스토리", "드라마"],
-    date: "2021-08-18",
+    date: "2021-08-05",
     active: false,
   },
   {
@@ -133,7 +133,7 @@ export const webToonList = [
     mViews: 600,
     day: "금",
     type: ["스토리", "스릴러"],
-    date: "2021-08-19",
+    date: "2021-08-06",
     active: false,
   },
   {
@@ -146,7 +146,7 @@ export const webToonList = [
     mViews: 2000,
     day: "토",
     type: ["에피소드", "일상"],
-    date: "2021-08-23",
+    date: "2021-08-07",
     active: false,
   },
   {
@@ -159,7 +159,7 @@ export const webToonList = [
     mViews: 1000,
     day: "일",
     type: ["옴니버스", "드라마"],
-    date: "2021-08-23",
+    date: "2021-08-08",
     active: false,
   },
   {
@@ -172,7 +172,7 @@ export const webToonList = [
     mViews: 200,
     day: "월",
     type: ["드라마", "판타지"],
-    date: "2021-08-12",
+    date: "2021-08-09",
     active: false,
   },
   {
