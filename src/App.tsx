@@ -1,12 +1,14 @@
 import React from "react";
-import WebToonApp from "./containers/webToonApp";
 import WebToonList from "./components/WebToonList";
+import WebToonListMenu from "./components/WebToonListMenu";
+
 import { Route, Switch } from "react-router-dom";
 const App: React.FC = () => {
   return (
     <>
-      <WebToonApp />
+      <WebToonListMenu />
       <Switch>
+        <Route path="/day/:day/:filter" component={WebToonList} />
         <Route path="/day/:day" component={WebToonList} />
         <Route path="/" component={WebToonList} />
       </Switch>
