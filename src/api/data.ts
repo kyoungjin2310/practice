@@ -195,7 +195,7 @@ export const webToonList = [
     favoriteNum: 9,
     views: 500,
     fViews: 220,
-    mViews: 350,
+    mViews: 35000,
     day: "수",
     type: ["판타지", "개그"],
     date: "2021-08-01",

@@ -18,10 +18,10 @@ const initialState: ListState = webToonList;
 //reducer
 const reducer = createReducer<ListState, ListAction>(initialState, {
   [FAVORITE_NUM]: (state) =>
-    state.sort((a, b) => b.favoriteNum - a.favoriteNum),
-  [VIEWS]: (state) => state.sort((a, b) => b.views - a.views),
-  [F_VIEWS]: (state) => state.sort((a, b) => b.fViews - a.fViews),
-  [M_VIEWS]: (state) => state.sort((a, b) => b.mViews - a.mViews),
+    state.sort((a, b) => b.favoriteNum - a.favoriteNum).map((n) => n),
+  [VIEWS]: (state) => state.sort((a, b) => b.views - a.views).map((n) => n),
+  [F_VIEWS]: (state) => state.sort((a, b) => b.fViews - a.fViews).map((n) => n),
+  [M_VIEWS]: (state) => state.sort((a, b) => b.mViews - a.mViews).map((n) => n),
   [DAY_VIEWS]: (state, { payload: day }) =>
     state.map((list) =>
       list.day === day ? { ...list, active: true } : { ...list, active: false }
@@ -31,10 +31,12 @@ const reducer = createReducer<ListState, ListAction>(initialState, {
       list.day === type ? { ...list, active: true } : { ...list, active: false }
     ),
   [DATE_VIEWS]: (state) =>
-    state.sort(
-      (a, b) =>
-        parseInt(b.date.replace("-", "")) - parseInt(a.date.replace("-", ""))
-    ),
+    state
+      .sort(
+        (a, b) =>
+          parseInt(b.date.replace("-", "")) - parseInt(a.date.replace("-", ""))
+      )
+      .map((n) => n),
   [TODAY_VIEWS]: (state, { payload: day }) =>
     state.map((list) =>
       list.day === day ? { ...list, active: true } : { ...list, active: false }

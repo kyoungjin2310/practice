@@ -1,4 +1,4 @@
-import React, { MouseEvent, ChangeEvent, useState, useCallback } from "react";
+import React, { MouseEvent, ChangeEvent, useState, useEffect } from "react";
 import { menu, menuTab } from "../api/data";
 
 type WebToonListFilterProps = {
@@ -21,18 +21,23 @@ function WebToonListFilter({
   const [value, setVaule] = useState("");
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setVaule(e.target.value);
-    if (e.target.value === "인기순") {
-      getFavoriteViews();
-    } else if (e.target.value === "여성 인기순") {
-      getFViewsViews();
-    } else if (e.target.value === "남성 인기순") {
-      getMViewsViews();
-    } else if (e.target.value === "조회순") {
-      getViews();
-    } else if (e.target.value === "업데이트순") {
-      getDateViews();
-    }
   };
+
+  useEffect(() => {
+    if (value === "인기순") {
+      getFavoriteViews();
+    } else if (value === "여성 인기순") {
+      getFViewsViews();
+    } else if (value === "남성 인기순") {
+      getMViewsViews();
+    } else if (value === "조회순") {
+      getViews();
+    } else if (value === "업데이트순") {
+      getDateViews();
+    } else {
+      return;
+    }
+  }, [value]);
 
   const onClick = (e: MouseEvent<HTMLAnchorElement>, day: string) => {
     e.preventDefault();
