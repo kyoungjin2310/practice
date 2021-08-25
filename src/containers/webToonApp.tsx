@@ -53,7 +53,7 @@ function WebToonApp() {
 
   useEffect(() => {
     getTodayViews(today);
-  }, []);
+  }, [today]);
 
   return (
     <>

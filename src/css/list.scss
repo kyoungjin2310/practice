@@ -16,12 +16,16 @@ li {
 }
 
 .show {
-  height: auto;
-  visibility: visible;
-  opacity: 1;
+  display: block;
 }
 .hide {
-  height: 0;
-  visibility: hidden;
-  opacity: 0;
+  display: none;
+}
+
+.list {
+  font-size: 12px;
+}
+
+.title {
+  font-size: 20px;
 }
