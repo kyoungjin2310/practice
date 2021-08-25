@@ -6,10 +6,8 @@ import {
   VIEWS,
   F_VIEWS,
   M_VIEWS,
-  // DAY_VIEWS,
   TYPE_VIEWS,
   DATE_VIEWS,
-  // TODAY_VIEWS,
 } from "./action";
 
 // 초기
@@ -28,10 +26,7 @@ const reducer = createReducer<ListState, ListAction>(initialState, {
     ),
   [DATE_VIEWS]: (state) =>
     state
-      .sort(
-        (a, b) =>
-          parseInt(b.date.replace("-", "")) - parseInt(a.date.replace("-", ""))
-      )
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
       .map((n) => n),
 });
 

@@ -4,6 +4,7 @@ import LisItem from "./LisItem";
 import { RootState } from "../modules/index";
 import { useParams } from "react-router-dom";
 import WebToonListFilter from "../components/WebToonListFilter";
+import NewListItem from "../components/NewWebToon";
 import { useDispatch } from "react-redux";
 import {
   favoriteViews,
@@ -68,6 +69,9 @@ function WebToonList() {
     <div>
       <div>
         <WebToonListFilter today={today} day={day} />
+      </div>
+      <div>
+        <NewListItem lists={lists} />
       </div>
       <ul>
         {day === undefined
