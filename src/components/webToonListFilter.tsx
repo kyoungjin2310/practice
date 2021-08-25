@@ -1,26 +1,51 @@
-import React, { MouseEvent, ChangeEvent, useState, useEffect } from "react";
-import { menu, menuTab } from "../api/data";
+import React, { ChangeEvent, useState, useEffect } from "react";
+import { menuTab } from "../api/data";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {
+  favoriteViews,
+  views,
+  fViewsViews,
+  mViewsViews,
+  dateViews,
+} from "../modules/day";
 
 type WebToonListFilterProps = {
-  getFavoriteViews: () => void;
-  getViews: () => void;
-  getFViewsViews: () => void;
-  getMViewsViews: () => void;
-  getDateViews: () => void;
-  getDayViews: (day: string) => void;
+  today?: string;
+  day: string | undefined;
 };
 
-function WebToonListFilter({
-  getFavoriteViews,
-  getViews,
-  getFViewsViews,
-  getMViewsViews,
-  getDateViews,
-  getDayViews,
-}: WebToonListFilterProps) {
+function WebToonListFilter({ today, day }: WebToonListFilterProps) {
+  let history = useHistory();
   const [value, setVaule] = useState("");
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setVaule(e.target.value);
+    if (day) {
+      history.push(`/${day}/${e.target.value}`);
+    } else {
+      history.push(`/${today}/${e.target.value}`);
+    }
+  };
+  const dispatch = useDispatch();
+
+  const getFavoriteViews = () => {
+    dispatch(favoriteViews());
+  };
+
+  const getViews = () => {
+    dispatch(views());
+  };
+
+  const getFViewsViews = () => {
+    dispatch(fViewsViews());
+  };
+
+  const getMViewsViews = () => {
+    dispatch(mViewsViews());
+  };
+
+  const getDateViews = () => {
+    dispatch(dateViews());
   };
 
   useEffect(() => {
@@ -39,35 +64,8 @@ function WebToonListFilter({
     }
   }, [value]);
 
-  const onClick = (e: MouseEvent<HTMLAnchorElement>, day: string) => {
-    e.preventDefault();
-    getDayViews(day);
-  };
-
   return (
     <>
-      <div className="tabMenu">
-        <ul>
-          {menu.map((list) => (
-            <li key={list.id}>
-              <a href="#">{list.name}</a>
-              {list.tabMenu
-                ? list.tabMenu.map((list) => (
-                    <div key={list.id}>
-                      <ul>
-                        <li>
-                          <a href="#" onClick={(e) => onClick(e, list.name)}>
-                            {list.name}
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  ))
-                : null}
-            </li>
-          ))}
-        </ul>
-      </div>
       <div className="selector">
         <select value={value} onChange={(e) => onChange(e)}>
           {menuTab.map((list) => (

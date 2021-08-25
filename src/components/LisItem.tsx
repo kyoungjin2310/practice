@@ -7,7 +7,7 @@ type ListItemProps = {
 
 function ListItem({ list }: ListItemProps) {
   return (
-    <li className={list.active ? "show list" : "hide list"}>
+    <li className="list">
       <h3 className="title">{list.webToon}</h3>
       <br />
       인기순:{list.favoriteNum}
