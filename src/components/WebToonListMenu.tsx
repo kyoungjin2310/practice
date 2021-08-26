@@ -10,17 +10,17 @@ function WebToonListMenu() {
           {menu.map((list) => (
             <li key={list.id}>
               <a href="#">{list.name}</a>
-              {list.tabMenu
-                ? list.tabMenu.map((list) => (
-                    <div key={list.id}>
-                      <ul>
-                        <li>
+              <div className="tabMenu2">
+                <ul>
+                  {list.tabMenu
+                    ? list.tabMenu.map((list) => (
+                        <li key={list.id}>
                           <Link to={`/day/${list.name}`}>{list.name}</Link>
                         </li>
-                      </ul>
-                    </div>
-                  ))
-                : null}
+                      ))
+                    : null}
+                </ul>
+              </div>
             </li>
           ))}
         </ul>

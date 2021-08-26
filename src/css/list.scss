@@ -7,25 +7,134 @@ button {
   border: none;
   outline: none;
 }
-ul {
+ul,
+li,
+div,
+p {
   padding: 0;
   margin: 0;
 }
 li {
   list-style: none;
 }
-
-.show {
+a {
   display: block;
+  height: 42px;
+  padding: 0 22px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 44px;
+  white-space: nowrap;
+  color: #000;
+  text-decoration: none;
+  font-size: 15px;
 }
-.hide {
-  display: none;
-}
-
 .list {
   font-size: 12px;
 }
 
 .title {
+  margin: 0;
+  padding: 0;
   font-size: 20px;
+}
+
+.img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+}
+
+.img2 {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+}
+
+.tabMenu {
+  position: relative;
+}
+.tabMenu ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: stretch;
+  justify-content: space-evenly;
+}
+
+.tabMenu2 {
+  position: absolute;
+  left: 0;
+  width: 100%;
+}
+.tabMenu2 ul {
+  border-bottom: 1px solid #ebebeb;
+  background: #f8f8f9;
+}
+.wrap {
+  max-width: 700px;
+  border: 1px solid #ebebeb;
+  margin: auto;
+}
+
+.listWrap {
+  margin: 60px 0;
+}
+
+.newListWrap {
+  position: relative;
+  margin-left: 20px;
+  margin-top: 20px;
+  border-bottom: 5px solid #eee;
+}
+.newListWrap2 {
+  padding: 0 0 30px;
+  position: relative;
+  overflow-x: auto;
+}
+.newListWrap ul {
+  width: 2800%;
+  display: flex;
+}
+
+.newListWrap li {
+  width: 100%;
+}
+
+.title {
+  font-size: 15px;
+  line-height: 1.25em;
+  font-weight: 200;
+}
+
+.h3 {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+.selector {
+  margin-left: 20px;
+}
+select {
+  padding: 5px;
+  border-color: #ccc;
+}
+.tar {
+  position: absolute;
+  right: 20px;
+  top: 0;
+  text-align: right;
+}
+
+.webToonList {
+  margin: 20px;
+  overflow: hidden;
+}
+
+.webToonList ul li {
+  float: left;
+  width: 33.33%;
+  margin-bottom: 20px;
 }

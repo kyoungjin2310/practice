@@ -23,7 +23,11 @@ function WebToonListFilter({ today, day }: WebToonListFilterProps) {
   };
 
   useEffect(() => {
-    setVaule(select[select.length - 1]);
+    if (select.length > 3) {
+      console.log(select);
+      console.log(select.length);
+      setVaule(select[select.length - 1]);
+    }
   }, [location]);
 
   return (

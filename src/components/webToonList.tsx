@@ -44,10 +44,12 @@ function WebToonList() {
   const getDateViews = () => {
     dispatch(dateViews());
   };
+
   useEffect(() => {
     setToday(week[d.getDay()]);
     getFavoriteViews();
   }, []);
+
   useEffect(() => {
     console.log(filter);
     if (filter === "인기순") {
@@ -66,22 +68,26 @@ function WebToonList() {
   }, [filter]);
 
   return (
-    <div>
+    <div className="listWrap">
       <div>
         <WebToonListFilter today={today} day={day} />
       </div>
-      <div>
+      <div className="newListWrap">
         <NewListItem lists={lists} />
       </div>
-      <ul>
-        {day === undefined
-          ? lists.map((list) =>
-              list.day === today ? <LisItem list={list} key={list.id} /> : null
-            )
-          : lists.map((list) =>
-              list.day === day ? <LisItem list={list} key={list.id} /> : null
-            )}
-      </ul>
+      <div className="webToonList">
+        <ul>
+          {day === undefined
+            ? lists.map((list) =>
+                list.day === today ? (
+                  <LisItem list={list} key={list.id} />
+                ) : null
+              )
+            : lists.map((list) =>
+                list.day === day ? <LisItem list={list} key={list.id} /> : null
+              )}
+        </ul>
+      </div>
     </div>
   );
 }

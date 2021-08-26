@@ -8,6 +8,11 @@ type ListItemProps = {
 function ListItem({ list }: ListItemProps) {
   return (
     <li className="list">
+      <img
+        className="img2"
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
+        alt={`${list.name}`}
+      />
       <h3 className="title">{list.webToon}</h3>
       <br />
       인기순:{list.favoriteNum}

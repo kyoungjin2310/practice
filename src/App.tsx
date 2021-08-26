@@ -5,14 +5,14 @@ import WebToonListMenu from "./components/WebToonListMenu";
 import { Route, Switch } from "react-router-dom";
 const App: React.FC = () => {
   return (
-    <>
+    <div className="wrap">
       <WebToonListMenu />
       <Switch>
         <Route path="/day/:day/:filter" component={WebToonList} />
         <Route path="/day/:day" component={WebToonList} />
         <Route path="/" component={WebToonList} />
       </Switch>
-    </>
+    </div>
   );
 };
 
