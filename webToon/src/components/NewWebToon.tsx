@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useRef } from "react";
 import { List } from "../modules/day";
 import Slider from "react-slick";
 type NewListItemProps = {
   lists: List[];
 };
+
 function NewListItem({ lists }: NewListItemProps) {
   const [listNum, setListNum] = useState(0);
   let carouselRef = useRef([] as any);
@@ -15,21 +16,6 @@ function NewListItem({ lists }: NewListItemProps) {
   const listLength = lists.filter(
     (list) => list.date.indexOf(`${dateMonth}`) > 0
   ).length;
-
-  //const scroll = useCallback(() => {
-  //  console.log(Ref.current.scrollLeft % 680 === 0);
-  //  if (Ref.current.scrollLeft % 680 === 0) {
-  //    setListNum(Ref.current.scrollLeft / 680 + 1);
-  //  }
-  //}, [listNum]);
-
-  //useEffect(() => {
-  //Ref.current.addEventListener("scroll", scroll);
-  //scroll();
-  //return () => {
-  //   Ref.current.addEventListener("scroll", scroll);
-  //  };
-  //  }, [listNum]);
 
   const settings = {
     infinite: true,

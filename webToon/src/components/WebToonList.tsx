@@ -5,14 +5,6 @@ import { RootState } from "../modules/index";
 import { useParams } from "react-router-dom";
 import WebToonListFilter from "../components/WebToonListFilter";
 import NewListItem from "../components/NewWebToon";
-import { useDispatch } from "react-redux";
-import {
-  favoriteViews,
-  views,
-  fViewsViews,
-  mViewsViews,
-  dateViews,
-} from "../modules/day";
 
 function NewLists(list: any) {
   console.log("활성 사용자 수를 세는중...");
@@ -29,58 +21,22 @@ function WebToonList() {
   const { day }: any = useParams();
   const { filter }: any = useParams();
   const lists = useSelector((state: RootState) => state.reducer);
-
-  const dispatch = useDispatch();
-
-  const getFavoriteViews = () => {
-    dispatch(favoriteViews());
-  };
-
-  const getViews = () => {
-    dispatch(views());
-  };
-
-  const getFViewsViews = () => {
-    dispatch(fViewsViews());
-  };
-
-  const getMViewsViews = () => {
-    dispatch(mViewsViews());
-  };
-
-  const getDateViews = () => {
-    dispatch(dateViews());
-  };
-
+  const rendomList = [...lists];
   useEffect(() => {
     setToday(week[d.getDay()]);
-    getFavoriteViews();
   }, []);
 
   useEffect(() => {
     console.log(filter);
-    if (filter === "인기순") {
-      getFavoriteViews();
-    } else if (filter === "여성 인기순") {
-      getFViewsViews();
-    } else if (filter === "남성 인기순") {
-      getMViewsViews();
-    } else if (filter === "조회순") {
-      getViews();
-    } else if (filter === "업데이트순") {
-      getDateViews();
-    } else {
-      return;
-    }
   }, [filter]);
-  const newWebtoonlist = useMemo(() => NewLists(lists), [lists]);
+
   return (
     <div className="listWrap">
       <div>
         <WebToonListFilter today={today} day={day} />
       </div>
       <div className="newListWrap">
-        {<NewListItem lists={newWebtoonlist} />}
+        <NewListItem lists={NewLists(rendomList)} />
       </div>
       <div className="webToonList">
         <ul>
