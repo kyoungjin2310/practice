@@ -4,7 +4,7 @@ import LisItem from "./LisItem";
 import { RootState } from "../modules/index";
 import { useParams } from "react-router-dom";
 import WebToonListFilter from "../components/WebToonListFilter";
-import NewListItem from "../components/NewWebToon";
+import NewListItem from "./NewWebToonItem";
 
 function NewLists(list: any) {
   console.log("활성 사용자 수를 세는중...");
@@ -22,6 +22,7 @@ function WebToonList() {
   const { filter }: any = useParams();
   const lists = useSelector((state: RootState) => state.reducer);
   const rendomList = [...lists];
+
   useEffect(() => {
     setToday(week[d.getDay()]);
   }, []);

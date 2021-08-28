@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { List } from "../modules/day";
 import Slider from "react-slick";
 type NewListItemProps = {
@@ -7,8 +7,6 @@ type NewListItemProps = {
 
 function NewListItem({ lists }: NewListItemProps) {
   const [listNum, setListNum] = useState(0);
-  let carouselRef = useRef([] as any);
-  let Ref = useRef("" as any);
   const date = new Date();
   const dateNum = date.getMonth() + 1;
   const dateMonth = dateNum > 10 ? dateNum : "0" + dateNum;
@@ -33,13 +31,9 @@ function NewListItem({ lists }: NewListItemProps) {
       </p>
       <div className="newListWrap2">
         <Slider {...settings}>
-          {lists.map((list, index) =>
+          {lists.map((list) =>
             list.date.indexOf(`${dateMonth}`) > 0 ? (
-              <div
-                className="list"
-                key={list.id}
-                ref={(elem) => (carouselRef.current[index] = elem)}
-              >
+              <div className="list" key={list.id}>
                 <img
                   className="img"
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
