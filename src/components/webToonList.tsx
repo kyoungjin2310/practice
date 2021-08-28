@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import LisItem from "./LisItem";
 import { RootState } from "../modules/index";
@@ -13,6 +13,13 @@ import {
   mViewsViews,
   dateViews,
 } from "../modules/day";
+
+function NewLists(list: any) {
+  console.log("활성 사용자 수를 세는중...");
+  return list.sort(() => {
+    return Math.random() - Math.random();
+  });
+}
 
 function WebToonList() {
   const [today, setToday] = useState("");
@@ -66,14 +73,14 @@ function WebToonList() {
       return;
     }
   }, [filter]);
-
+  const newWebtoonlist = useMemo(() => NewLists(lists), [lists]);
   return (
     <div className="listWrap">
       <div>
         <WebToonListFilter today={today} day={day} />
       </div>
       <div className="newListWrap">
-        <NewListItem lists={lists} />
+        {<NewListItem lists={newWebtoonlist} />}
       </div>
       <div className="webToonList">
         <ul>

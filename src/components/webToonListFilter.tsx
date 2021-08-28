@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState, useEffect } from "react";
+import React, { ChangeEvent, useState, useEffect, useCallback } from "react";
 import { menuTab } from "../api/data";
 import { useHistory, useLocation } from "react-router-dom";
 
@@ -13,14 +13,17 @@ function WebToonListFilter({ today, day }: WebToonListFilterProps) {
   const location = useLocation();
   const select = location.pathname.split("/");
 
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setVaule(e.target.value);
-    if (day) {
-      history.push(`/day/${day}/${e.target.value}`);
-    } else {
-      history.push(`/day/${today}/${e.target.value}`);
-    }
-  };
+  const onChange = useCallback(
+    (e: ChangeEvent<HTMLSelectElement>) => {
+      setVaule(e.target.value);
+      if (day) {
+        history.push(`/day/${day}/${e.target.value}`);
+      } else {
+        history.push(`/day/${today}/${e.target.value}`);
+      }
+    },
+    [value]
+  );
 
   useEffect(() => {
     if (select.length > 3) {
