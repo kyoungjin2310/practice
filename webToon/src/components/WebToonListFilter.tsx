@@ -2,7 +2,6 @@ import React, { ChangeEvent, useState, useEffect, useCallback } from "react";
 import { menuTab } from "../api/data";
 import { useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-
 import {
   favoriteViews,
   views,
@@ -12,11 +11,10 @@ import {
 } from "../modules/day";
 
 type WebToonListFilterProps = {
-  today: string;
-  day?: string;
+  day: string;
 };
 
-function WebToonListFilter({ today, day }: WebToonListFilterProps) {
+function WebToonListFilter({ day }: WebToonListFilterProps) {
   let history = useHistory();
   const [value, setVaule] = useState("");
   const location = useLocation();
@@ -25,11 +23,7 @@ function WebToonListFilter({ today, day }: WebToonListFilterProps) {
   const onChange = useCallback(
     (e: ChangeEvent<HTMLSelectElement>) => {
       setVaule(e.target.value);
-      if (day) {
-        history.push(`/day/${day}/${e.target.value}`);
-      } else {
-        history.push(`/day/${today}/${e.target.value}`);
-      }
+      history.push(`/day/${day}/${e.target.value}`);
     },
     [value]
   );
