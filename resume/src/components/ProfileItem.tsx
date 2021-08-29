@@ -1,5 +1,6 @@
 import React from "react";
 import { PList } from "../data/data";
+import { BsDot } from "react-icons/bs";
 
 type ProfileItemProps = {
   list: PList;
@@ -8,9 +9,18 @@ type ProfileItemProps = {
 function ProfileItem({ list }: ProfileItemProps) {
   return (
     <li>
-      <h4>{list.name}</h4>
+      <h4 className="listTitle">
+        <BsDot className="icon" />
+        {list.name}
+      </h4>
       <p>{list.details}</p>
-      <p>{list.skills}</p>
+      <div>
+        <ul>
+          {list.skills?.map((list, index) => (
+            <li key={index}>{list}</li>
+          ))}
+        </ul>
+      </div>
     </li>
   );
 }

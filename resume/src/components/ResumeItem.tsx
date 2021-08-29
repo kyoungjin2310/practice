@@ -1,5 +1,6 @@
 import React from "react";
 import { CList } from "../data/data";
+import { BsDash } from "react-icons/bs";
 
 type ResumeListItemProps = {
   list: CList;
@@ -7,10 +8,10 @@ type ResumeListItemProps = {
 
 function ResumeListItem({ list }: ResumeListItemProps) {
   return (
-    <li>
-      <h4>{list.name}</h4>
-      <p>{list.details}</p>
-      <p>{list.detailsDate}</p>
+    <li className="fll">
+      <BsDash className="icon" />
+      <h6 className="listTitle">{list.name}</h6>
+      <p className="date">{list.detailsDate}</p>
     </li>
   );
 }
