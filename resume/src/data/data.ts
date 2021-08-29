@@ -143,6 +143,7 @@ export const careerList: CList[] = [
 export type PList = {
   name: string;
   details?: string;
+  url?: string;
   skills?: string[];
 };
 
@@ -158,6 +159,10 @@ export const profile: PList[] = [
   {
     name: "Email",
     details: "kyoungjn2310@gmail.com",
+  },
+  {
+    name: "GitHub",
+    details: "https://github.com/kyoungjin2310",
   },
   {
     name: "Skills",

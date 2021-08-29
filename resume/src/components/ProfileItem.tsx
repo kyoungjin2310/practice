@@ -13,7 +13,15 @@ function ProfileItem({ list }: ProfileItemProps) {
         <BsDot className="icon" />
         {list.name}
       </h4>
-      <p>{list.details}</p>
+      <p>
+        {list.name === "Email" ? (
+          <a href={`mailto:${list.details}`}>{list.details}</a>
+        ) : list.name === "GitHub" ? (
+          <a href={list.details}>{list.details}</a>
+        ) : (
+          list.details
+        )}
+      </p>
       <div>
         <ul>
           {list.skills?.map((list, index) => (

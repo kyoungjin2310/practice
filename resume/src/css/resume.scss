@@ -166,7 +166,9 @@ $font-Trochut: "Trochut", cursive;
     margin-left: 0;
   }
 }
-
+.profileWrap a {
+  color: #947253;
+}
 //listWrap
 .listWrap .fll {
   position: relative;
@@ -203,5 +205,5 @@ $font-Trochut: "Trochut", cursive;
   top: 0;
   left: 27px;
   letter-spacing: 0;
-  color: #947253;
+  color: #888;
 }
