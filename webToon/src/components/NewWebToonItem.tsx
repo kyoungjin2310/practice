@@ -21,7 +21,8 @@ function NewListItem({ lists }: NewListItemProps) {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-    afterChange: (listNum: any) => setListNum(listNum),
+    //08.31 수정
+    afterChange: (listNum: number) => setListNum(listNum),
   };
   return (
     <>
