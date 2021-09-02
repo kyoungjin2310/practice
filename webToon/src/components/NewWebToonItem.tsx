@@ -6,14 +6,14 @@ type NewListItemProps = {
 };
 
 function NewListItem({ lists }: NewListItemProps) {
-  const [listNum, setListNum] = useState(0);
+  const [listNum, setListNum] = useState(1);
   const date = new Date();
   //  const dateNum = date.getMonth() + 1;
   const dateNum = 8;
-  const dateMonth = dateNum > 10 ? dateNum : "0" + dateNum;
+  const dateMonth = dateNum <= 10 ? "0" + dateNum : dateNum;
   console.log(dateMonth);
   const listLength = lists.filter(
-    (list) => list.date.indexOf(`${dateMonth}`) > 0
+    (list) => list.date.indexOf(`-${dateMonth}-`) > 0
   ).length;
 
   const settings = {
@@ -23,13 +23,13 @@ function NewListItem({ lists }: NewListItemProps) {
     slidesToScroll: 1,
     arrows: false,
     //08.31 수정
-    afterChange: (listNum: number) => setListNum(listNum),
+    afterChange: (listNum: number) => setListNum(listNum + 1),
   };
   return (
     <>
       <h3 className="title h3">이달의 신작</h3>
       <p className="tar">
-        {listNum < 10 ? "0" + (listNum + 1) : listNum}/{listLength}
+        {listNum < 10 ? "0" + listNum : listNum}/{listLength}
       </p>
       <div className="newListWrap2">
         <Slider {...settings}>
