@@ -34,7 +34,7 @@ function NewListItem({ lists }: NewListItemProps) {
       <div className="newListWrap2">
         <Slider {...settings}>
           {lists.map((list) =>
-            list.date.indexOf(`${dateMonth}`) > 0 ? (
+            list.date.indexOf(`-${dateMonth}-`) > 0 ? (
               <div className="list" key={list.id}>
                 <img
                   className="img"
