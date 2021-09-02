@@ -8,7 +8,8 @@ type NewListItemProps = {
 function NewListItem({ lists }: NewListItemProps) {
   const [listNum, setListNum] = useState(0);
   const date = new Date();
-  const dateNum = date.getMonth() + 1;
+  //  const dateNum = date.getMonth() + 1;
+  const dateNum = 8;
   const dateMonth = dateNum > 10 ? dateNum : "0" + dateNum;
   console.log(dateMonth);
   const listLength = lists.filter(
