@@ -19,7 +19,7 @@ function WebToonListFilter({ day }: WebToonListFilterProps) {
   const [value, setVaule] = useState("");
   const location = useLocation();
   const select = location.pathname.split("/");
-
+  const home = window.location.origin + "/";
   const onChange = useCallback(
     (e: ChangeEvent<HTMLSelectElement>) => {
       setVaule(e.target.value);
@@ -51,6 +51,11 @@ function WebToonListFilter({ day }: WebToonListFilterProps) {
   };
 
   useEffect(() => {
+    console.log(window.location.href);
+    console.log(home);
+    if (window.location.href === home) {
+      setVaule("인기순");
+    }
     if (select.length > 3) {
       console.log(select);
       console.log(select.length);
