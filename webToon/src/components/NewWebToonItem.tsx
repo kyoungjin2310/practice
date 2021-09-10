@@ -9,10 +9,12 @@ function NewListItem({ lists }: NewListItemProps) {
   const [listNum, setListNum] = useState(1);
   const date = new Date();
   ////  const dateNum = date.getMonth() + 1;
+  // 삭제하고 신작, 웹툰리스트 따로 만들기
   const dateNum = 8;
   const dateMonth = dateNum <= 10 ? "0" + dateNum : dateNum;
   console.log(dateMonth);
   const listLength = lists.filter(
+    // 여기 고치기 list.date.indexOf(`-${dateMonth}-`) > 0가 반복됨
     (list) => list.date.indexOf(`-${dateMonth}-`) > 0
   ).length;
 

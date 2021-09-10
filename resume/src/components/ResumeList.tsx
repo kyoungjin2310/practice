@@ -7,6 +7,7 @@ type ResumeListProps = {
   list: CList[];
 };
 
+//삭제하고 보이는 대로 뿌리기
 function DateLists(list: CList[]) {
   return list.sort((a, b) => {
     return (
@@ -18,9 +19,10 @@ function DateLists(list: CList[]) {
 
 function ResumeList({ list }: ResumeListProps) {
   const lists = DateLists(list);
+  //필터 삭제하고 map 사용
   const responsiveItem = lists.filter((n) => n.area === "반응형");
-  const nonReactiveItem = lists.filter((n) => n.area == "비반응형");
-  const otherItem = lists.filter((n) => n.area == "기타");
+  const nonReactiveItem = lists.filter((n) => n.area === "비반응형");
+  const otherItem = lists.filter((n) => n.area === "기타");
   return (
     <>
       <ul className="careerList">

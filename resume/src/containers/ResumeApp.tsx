@@ -4,6 +4,7 @@ import Profile from "../components/Profile";
 import { profile, careerList } from "../data/data";
 import { DiIonic } from "react-icons/di";
 
+//App.tsx에서 합치기
 function ResumeApp() {
   return (
     <>

@@ -15,11 +15,12 @@ type WebToonListFilterProps = {
 };
 
 function WebToonListFilter({ day }: WebToonListFilterProps) {
-  let history = useHistory();
+  const history = useHistory();
   const [value, setVaule] = useState("");
   const location = useLocation();
   const select = location.pathname.split("/");
   const home = window.location.origin + "/";
+  //쿼리스트링으로 작성
   const onChange = useCallback(
     (e: ChangeEvent<HTMLSelectElement>) => {
       setVaule(e.target.value);
@@ -30,6 +31,14 @@ function WebToonListFilter({ day }: WebToonListFilterProps) {
 
   const dispatch = useDispatch();
 
+  // redux빼고 switch 함수문 쓰기
+  {
+    /*function filterWebtoons(type) {
+    switch(type) {
+       case "a": { return a sort }
+    }
+    }*/
+  }
   const getFavoriteViews = () => {
     dispatch(favoriteViews());
   };

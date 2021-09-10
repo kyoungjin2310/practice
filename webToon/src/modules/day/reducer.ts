@@ -13,7 +13,7 @@ import {
 // 초기
 const initialState: ListState = webToonList;
 
-//reducer
+//reducer 삭제하고 키를 파라미터로 받아와서 작성하기
 const reducer = createReducer<ListState, ListAction>(initialState, {
   [FAVORITE_NUM]: (state) =>
     state.sort((a, b) => b.favoriteNum - a.favoriteNum).map((n) => n),

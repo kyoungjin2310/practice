@@ -70,6 +70,7 @@ export const menuTab = [
   },
 ];
 
+//신작, 웹툰 리스트 아예 따로 두기
 export const webToonList = [
   {
     id: 1,

@@ -1,3 +1,4 @@
+//CList -> career로 바꾸기
 export type CList = {
   name: string;
   details: string;
@@ -5,6 +6,7 @@ export type CList = {
   area: string;
 };
 
+//반응형, 비반응형, 기타로 분류해서 정리하고 map사용하기
 export const careerList: CList[] = [
   {
     name: "삼성서울병원 의학정보시스템",
