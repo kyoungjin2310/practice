@@ -1,5 +1,5 @@
 import React from "react";
-import { List } from "../modules/day";
+import { List } from "../api/data";
 
 type ListItemProps = {
   list: List;

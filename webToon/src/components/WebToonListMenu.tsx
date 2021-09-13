@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { menu } from "../api/data";
 import { Link } from "react-router-dom";
-
+import { useLocation } from "react-router";
+import qs from "qs";
 function WebToonListMenu() {
+  const location = useLocation();
+  const query = qs.parse(location.search, {
+    ignoreQueryPrefix: true,
+  });
+  useEffect(() => {
+    console.log(location.search);
+  }, []);
   return (
     <>
       <div className="tabMenu">
@@ -16,7 +24,7 @@ function WebToonListMenu() {
                     ? list.tabMenu.map((list) => (
                         <li key={list.id}>
                           {/*쿼리스트링으로 바꾸기*/}
-                          <Link to={`/day/${list.name}`}>{list.name}</Link>
+                          <Link to={`/day/week=${list.name}`}>{list.name}</Link>
                         </li>
                       ))
                     : null}

@@ -1,14 +1,6 @@
 import React, { ChangeEvent, useState, useEffect, useCallback } from "react";
 import { menuTab } from "../api/data";
 import { useHistory, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import {
-  favoriteViews,
-  views,
-  fViewsViews,
-  mViewsViews,
-  dateViews,
-} from "../modules/day";
 
 type WebToonListFilterProps = {
   day: string;
@@ -29,8 +21,6 @@ function WebToonListFilter({ day }: WebToonListFilterProps) {
     [value]
   );
 
-  const dispatch = useDispatch();
-
   // redux빼고 switch 함수문 쓰기
   {
     /*function filterWebtoons(type) {
@@ -39,25 +29,15 @@ function WebToonListFilter({ day }: WebToonListFilterProps) {
     }
     }*/
   }
-  const getFavoriteViews = () => {
-    dispatch(favoriteViews());
-  };
+  const getFavoriteViews = () => {};
 
-  const getViews = () => {
-    dispatch(views());
-  };
+  const getViews = () => {};
 
-  const getFViewsViews = () => {
-    dispatch(fViewsViews());
-  };
+  const getFViewsViews = () => {};
 
-  const getMViewsViews = () => {
-    dispatch(mViewsViews());
-  };
+  const getMViewsViews = () => {};
 
-  const getDateViews = () => {
-    dispatch(dateViews());
-  };
+  const getDateViews = () => {};
 
   useEffect(() => {
     console.log(window.location.href);

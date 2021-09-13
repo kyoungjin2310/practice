@@ -1,20 +1,12 @@
-import { ListState, ListAction } from "./type";
+///import { ListState, ListAction } from "./type";
 import { createReducer } from "typesafe-actions";
 import { webToonList } from "../../api/data";
-import {
-  FAVORITE_NUM,
-  VIEWS,
-  F_VIEWS,
-  M_VIEWS,
-  TYPE_VIEWS,
-  DATE_VIEWS,
-} from "./action";
 
 // 초기
-const initialState: ListState = webToonList;
+//const initialState: ListState = webToonList;
 
 //reducer 삭제하고 키를 파라미터로 받아와서 작성하기
-const reducer = createReducer<ListState, ListAction>(initialState, {
+/*const reducer = createReducer<ListState, ListAction>(initialState, {
   [FAVORITE_NUM]: (state) =>
     state.sort((a, b) => b.favoriteNum - a.favoriteNum).map((n) => n),
   [VIEWS]: (state) => state.sort((a, b) => b.views - a.views).map((n) => n),
@@ -30,4 +22,4 @@ const reducer = createReducer<ListState, ListAction>(initialState, {
       .map((n) => n),
 });
 
-export default reducer;
+export default reducer;*/
