@@ -9,14 +9,6 @@ import NewListItem from "./NewWebToonItem";
 const week = new Array("일", "월", "화", "수", "목", "금", "토");
 const d = new Date();
 const today = week[d.getDay()];
-//컴포넌트 아닌거는 소문자로 쓰기
-// function NewLists(list: List[]) {
-//   return list.map((list: any) =>
-//     list.sort(() => {
-//       return Math.random() - Math.random();
-//     })
-//   );
-// }
 
 function WebToonList({ location }: any) {
   // 쿼리 스트링 쓰기

@@ -23,8 +23,9 @@ function WebToonListMenu() {
                   {list.tabMenu
                     ? list.tabMenu.map((list) => (
                         <li key={list.id}>
-                          {/*쿼리스트링으로 바꾸기*/}
-                          <Link to={`/day/week=${list.name}`}>{list.name}</Link>
+                          <Link to={`/day/week=${list.name[1]}`}>
+                            {list.name[0]}
+                          </Link>
                         </li>
                       ))
                     : null}

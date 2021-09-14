@@ -29,15 +29,6 @@ function WebToonListFilter({ day }: WebToonListFilterProps) {
     }
     }*/
   }
-  const getFavoriteViews = () => {};
-
-  const getViews = () => {};
-
-  const getFViewsViews = () => {};
-
-  const getMViewsViews = () => {};
-
-  const getDateViews = () => {};
 
   useEffect(() => {
     console.log(window.location.href);
@@ -51,15 +42,10 @@ function WebToonListFilter({ day }: WebToonListFilterProps) {
       setVaule(select[select.length - 1]);
     }
     if (value === "인기순") {
-      getFavoriteViews();
     } else if (value === "여성 인기순") {
-      getFViewsViews();
     } else if (value === "남성 인기순") {
-      getMViewsViews();
     } else if (value === "조회순") {
-      getViews();
     } else if (value === "업데이트순") {
-      getDateViews();
     } else {
       return;
     }

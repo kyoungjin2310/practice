@@ -7,12 +7,7 @@ type NewListItemProps = {
 
 function NewListItem({ lists }: NewListItemProps) {
   const [listNum, setListNum] = useState(1);
-  const date = new Date();
-  const dateNum = date.getMonth() + 1;
-  // 삭제하고 신작, 웹툰리스트 따로 만들기
-  const dateMonth = dateNum <= 10 ? "0" + dateNum : dateNum;
-  const list = lists.filter((list) => list.date.indexOf(`-${dateMonth}-`) > 0);
-  const listLength = list.length;
+  const listLength = lists.length;
 
   const settings = {
     infinite: true,
@@ -30,7 +25,7 @@ function NewListItem({ lists }: NewListItemProps) {
       </p>
       <div className="newListWrap2">
         <Slider {...settings}>
-          {list.map((list) => (
+          {lists.map((list) => (
             <div className="list" key={list.id}>
               <img
                 className="img"
