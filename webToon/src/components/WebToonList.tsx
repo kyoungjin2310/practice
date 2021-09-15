@@ -1,6 +1,6 @@
 import React from "react";
 import LisItem from "./LisItem";
-import { List, newWebToonList, webToonList } from "../api/data";
+import { newWebToonList, webToonList } from "../api/data";
 import WebToonListFilter from "../components/WebToonListFilter";
 import qs from "qs";
 import NewListItem from "./NewWebToonItem";
