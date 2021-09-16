@@ -17,7 +17,7 @@ function WebToonList({ location }: any) {
 
   return (
     <div className="listWrap">
-      <WebToonListFilter day={day || week[d.getDay()]} />
+      <WebToonListFilter day={day} />
       <NewListItem lists={newWebToonList} />
       <div className="webToonList">
         <ul>
