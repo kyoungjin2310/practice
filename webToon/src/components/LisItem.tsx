@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { List } from "../api/data";
 
 type ListItemProps = {

@@ -65,7 +65,7 @@ function WebToonListFilter({ day }: WebToonListFilterProps) {
       setVaule("업데이트순");
     }
     console.log();
-  }, [value]);
+  }, [location]);
 
   return (
     <>
