@@ -6,12 +6,11 @@ import qs from "qs";
 import NewListItem from "./NewWebToonItem";
 
 //오늘 요일
-const week = new Array("일", "월", "화", "수", "목", "금", "토");
+const week = new Array("sun", "mon", "tue", "wed", "thu", "fri", "sat");
 const d = new Date();
 const today = week[d.getDay()];
 
 function WebToonList({ location }: any) {
-  // 쿼리 스트링 쓰기
   //const day = day || 오늘로 작성
   const day = today || location;
 
@@ -22,7 +21,7 @@ function WebToonList({ location }: any) {
       <div className="webToonList">
         <ul>
           {webToonList.map((list) =>
-            list.day === day ? <LisItem list={list} key={list.id} /> : null
+            list.day[1] === day ? <LisItem list={list} key={list.id} /> : null
           )}
         </ul>
       </div>

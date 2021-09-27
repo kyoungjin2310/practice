@@ -1,13 +1,6 @@
-import React, {
-  ChangeEvent,
-  useState,
-  useEffect,
-  useCallback,
-  useReducer,
-} from "react";
-import { List, menuTab, webToonList } from "../api/data";
+import React, { ChangeEvent, useState, useEffect, useCallback } from "react";
+import { menuTab, webToonList } from "../api/data";
 import { useHistory, useLocation } from "react-router-dom";
-import reducer from "../modules/day/reducer";
 import qs from "qs";
 type WebToonListFilterProps = {
   day: string;
@@ -19,70 +12,59 @@ function getKeyByValue(object: any, value: any) {
 }
 
 function WebToonListFilter({ day }: WebToonListFilterProps) {
-  const [state, dispatch] = useReducer(reducer, webToonList);
   const history = useHistory();
   const [value, setVaule] = useState("");
   const location = useLocation();
-  const select = location.pathname.split("/");
-  // const home = window.location.origin + "/";
 
-  //쿼리스트링으로 작성
   const changeHistory = (key: any) => {
-    history.push(`/day/week=${day[1]}/${key}`);
+    const optionUrl = qs.stringify(
+      { week: day, option: key },
+      { indices: false }
+    );
+    history.push(`/day/${optionUrl}`);
   };
 
-  //swich 문
   const onChange = useCallback(
     (e: ChangeEvent<HTMLSelectElement>) => {
       setVaule(e.target.value);
       console.log(e.target.value);
-      if (value === "인기순") {
-        const getKey = getKeyByValue(state[0], state[0].favoriteNum);
+      if (e.target.value === "인기순") {
+        const getKey = getKeyByValue(
+          webToonList[0],
+          webToonList[0].favoriteNum
+        );
         changeHistory(getKey);
-      } else if (value === "여성 인기순") {
-        const getKey = getKeyByValue(state[0], state[0].fViews);
+      } else if (e.target.value === "여성 인기순") {
+        const getKey = getKeyByValue(webToonList[0], webToonList[0].fViews);
         changeHistory(getKey);
-      } else if (value === "남성 인기순") {
-        const getKey = getKeyByValue(state[0], state[0].mViews);
+      } else if (e.target.value === "남성 인기순") {
+        const getKey = getKeyByValue(webToonList[0], webToonList[0].mViews);
         changeHistory(getKey);
-      } else if (value === "조회순") {
-        const getKey = getKeyByValue(state[0], state[0].views);
+      } else if (e.target.value === "조회순") {
+        const getKey = getKeyByValue(webToonList[0], webToonList[0].views);
         changeHistory(getKey);
-      } else if (value === "업데이트순") {
-        const getKey = getKeyByValue(state[0], state[0].date);
+      } else if (e.target.value === "업데이트순") {
+        const getKey = getKeyByValue(webToonList[0], webToonList[0].date);
         changeHistory(getKey);
-      } else {
-        return;
       }
     },
     [value]
   );
 
   useEffect(() => {
-    console.log(location.pathname);
-    // if (select.length > 3) {
-    //   console.log(select);
-    //   console.log(select.length);
-    //   setVaule(select[select.length - 1]);
-    // }
-    // if (value === "인기순") {
-    //   const getKey = getKeyByValue(state[0], state[0].favoriteNum);
-    //   changeHistory(getKey);
-    // } else if (value === "여성 인기순") {
-    //   const getKey = getKeyByValue(state[0], state[0].fViews);
-    //   changeHistory(getKey);
-    // } else if (value === "남성 인기순") {
-    //   const getKey = getKeyByValue(state[0], state[0].mViews);
-    //   changeHistory(getKey);
-    // } else if (value === "조회순") {
-    //   const getKey = getKeyByValue(state[0], state[0].views);
-    //   changeHistory(getKey);
-    // } else if (value === "업데이트순") {
-    //   const getKey = getKeyByValue(state[0], state[0].date);
-    //   changeHistory(getKey);
-    // } else {
-    //   return;
-    // }
+    const opt = qs.parse(location.pathname).option;
+    if (opt === "favoriteNum") {
+      setVaule("인기순");
+    } else if (opt === "fViews") {
+      setVaule("여성 인기순");
+    } else if (opt === "mViews") {
+      setVaule("남성 인기순");
+    } else if (opt === "views") {
+      setVaule("조회순");
+    } else if (opt === "date") {
+      setVaule("업데이트순");
+    }
+    console.log();
   }, [value]);
 
   return (
