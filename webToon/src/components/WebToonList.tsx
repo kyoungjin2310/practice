@@ -14,7 +14,7 @@ const today = week[d.getDay()];
 
 function listSort(arr: List[], key: any) {
   return arr.sort(function (a: any, b: any) {
-    if (key === "date") {
+    if (a[key] === a["date"]) {
       return (
         parseInt(b.date.replace("-", "")) - parseInt(a.date.replace("-", ""))
       );
