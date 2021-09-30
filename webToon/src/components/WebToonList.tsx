@@ -15,9 +15,9 @@ const today = week[d.getDay()];
 function listSort(arr: List[], key: any) {
   return arr.sort(function (a: any, b: any) {
     if (a[key] === a["date"]) {
-      return (
-        parseInt(b.date.replace("-", "")) - parseInt(a.date.replace("-", ""))
-      );
+      const dateA = new Date(a["date"]).getTime();
+      const dateB = new Date(b["date"]).getTime();
+      return dateB - dateA;
     } else {
       return b[key] - a[key];
     }
@@ -29,7 +29,25 @@ function WebToonList() {
   const location = useLocation();
   const day = today || location.pathname;
 
-  useEffect(() => {}, [location]);
+  useEffect(() => {
+    const obj = [
+      { id: 1, date: "2012-06-18" },
+      { id: 2, date: "2012-06-29" },
+    ];
+    function sort_list(arr: any, key: any) {
+      return arr.sort(function (a: any, b: any) {
+        if (a[key] === a["date"]) {
+          return (
+            parseInt(b.date.replace("-", "")) -
+            parseInt(a.date.replace("-", ""))
+          );
+        } else {
+          return b[key] - a[key];
+        }
+      });
+    }
+    console.log(sort_list(obj, "date"));
+  }, [location]);
 
   return (
     <div className="listWrap">
