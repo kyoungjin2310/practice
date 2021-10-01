@@ -79,6 +79,7 @@ a {
 }
 
 .listWrap {
+  position: relative;
   margin: 60px 0;
 }
 
@@ -90,6 +91,7 @@ a {
 }
 .newListWrap2 {
   padding: 0;
+  margin-left: 20px;
   position: relative;
   overflow: hidden;
 }
@@ -115,11 +117,13 @@ a {
 .h3 {
   padding: 0;
   margin: 0;
+  margin-left: 20px;
   margin-bottom: 20px;
   font-weight: bold;
 }
 .selector {
   margin-left: 20px;
+  margin-bottom: 20px;
 }
 select {
   padding: 5px;
@@ -127,8 +131,8 @@ select {
 }
 .tar {
   position: absolute;
-  right: 0;
-  top: 0;
+  right: 20px;
+  top: 50px;
   text-align: right;
 }
 

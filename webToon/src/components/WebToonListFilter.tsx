@@ -45,7 +45,7 @@ function WebToonListFilter({ day }: any) {
         changeHistory(getKey);
       }
     },
-    [location]
+    [day]
   );
 
   useEffect(() => {
