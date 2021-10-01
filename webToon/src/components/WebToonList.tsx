@@ -27,26 +27,18 @@ function listSort(arr: List[], key: any) {
 function WebToonList() {
   //const day = day || 오늘로 작성
   const location = useLocation();
-  const day = today || location.pathname;
+  const [day, setDay]: any = useState(
+    today || qs.parse(location.pathname)["/day/week"]
+  );
+  const weekList = webToonList.filter((list) => list.day[1] === day);
 
   useEffect(() => {
-    const obj = [
-      { id: 1, date: "2012-06-18" },
-      { id: 2, date: "2012-06-29" },
-    ];
-    function sort_list(arr: any, key: any) {
-      return arr.sort(function (a: any, b: any) {
-        if (a[key] === a["date"]) {
-          return (
-            parseInt(b.date.replace("-", "")) -
-            parseInt(a.date.replace("-", ""))
-          );
-        } else {
-          return b[key] - a[key];
-        }
-      });
+    const opt = qs.parse(location.pathname)["/day/week"];
+    setDay(opt);
+    console.log(day, "day");
+    if (location.pathname === "/") {
+      setDay(today);
     }
-    console.log(sort_list(obj, "date"));
   }, [location]);
 
   return (

@@ -2,16 +2,13 @@ import React, { ChangeEvent, useState, useEffect, useCallback } from "react";
 import { menuTab, webToonList } from "../api/data";
 import { useHistory, useLocation } from "react-router-dom";
 import qs from "qs";
-type WebToonListFilterProps = {
-  day: string;
-};
 function getKeyByValue(object: any, value: any) {
   for (let prop in object) {
     if (object[prop] === value) return prop;
   }
 }
 
-function WebToonListFilter({ day }: WebToonListFilterProps) {
+function WebToonListFilter({ day }: any) {
   const history = useHistory();
   const [value, setVaule] = useState("");
   const location = useLocation();
@@ -48,7 +45,7 @@ function WebToonListFilter({ day }: WebToonListFilterProps) {
         changeHistory(getKey);
       }
     },
-    [value]
+    [location]
   );
 
   useEffect(() => {
