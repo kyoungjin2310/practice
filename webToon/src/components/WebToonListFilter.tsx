@@ -12,13 +12,17 @@ function WebToonListFilter({ day }: any) {
   const history = useHistory();
   const [value, setVaule] = useState("");
   const location = useLocation();
+  const { search } = useLocation();
 
   const changeHistory = (key: any) => {
     const optionUrl = qs.stringify(
       { week: day, option: key },
       { indices: false }
     );
-    history.push(`/day/${optionUrl}`);
+    history.push({
+      pathname: "/day/weekday",
+      search: `${optionUrl}`,
+    });
   };
 
   const onChange = useCallback(
@@ -61,7 +65,7 @@ function WebToonListFilter({ day }: any) {
     } else if (opt === "date") {
       setVaule("업데이트순");
     }
-    console.log();
+    console.log(search);
   }, [location]);
 
   return (

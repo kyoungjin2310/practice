@@ -1,8 +1,21 @@
 import React from "react";
 import { menu } from "../api/data";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import qs from "qs";
 function WebToonListMenu() {
+  const history = useHistory();
+  const onClick = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    day: any
+  ) => {
+    e.preventDefault();
+    const optionUrl = qs.stringify({ week: day }, { indices: false });
+    history.push({
+      pathname: "/day/weekday",
+      search: `${optionUrl}`,
+    });
+  };
+
   return (
     <>
       <div className="tabMenu">
@@ -15,11 +28,9 @@ function WebToonListMenu() {
                   {list.tabMenu
                     ? list.tabMenu.map((list) => (
                         <li key={list.id}>
-                          <Link
-                            to={`/day/${qs.stringify({ week: list.name[1] })}`}
-                          >
+                          <a href="#" onClick={(e) => onClick(e, list.name[1])}>
                             {list.name[0]}
-                          </Link>
+                          </a>
                         </li>
                       ))
                     : null}

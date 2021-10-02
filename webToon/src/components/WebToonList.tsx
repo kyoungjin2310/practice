@@ -25,14 +25,13 @@ function listSort(arr: List[], key: any) {
 }
 
 function WebToonList() {
-  //const day = day || 오늘로 작성
   const location = useLocation();
   const [day, setDay]: any = useState(today);
 
   useEffect(() => {
-    const opt = qs.parse(location.pathname)["/day/week"];
+    const opt = qs.parse(location.search, { ignoreQueryPrefix: true })["week"];
     setDay(opt);
-    console.log(day, "day");
+    console.log(location.search, "day");
     if (location.pathname === "/") {
       setDay(today);
     }
@@ -44,9 +43,8 @@ function WebToonList() {
       <NewListItem lists={newWebToonList} />
       <div className="webToonList">
         <ul>
-          {listSort(webToonList, qs.parse(location.pathname).option).map(
-            (list) =>
-              list.day[1] === day ? <LisItem list={list} key={list.id} /> : null
+          {listSort(webToonList, qs.parse(location.search).option).map((list) =>
+            list.day[1] === day ? <LisItem list={list} key={list.id} /> : null
           )}
         </ul>
       </div>
