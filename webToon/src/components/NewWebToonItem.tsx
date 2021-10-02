@@ -8,7 +8,7 @@ type NewListItemProps = {
 function NewListItem({ lists }: NewListItemProps) {
   const [listNum, setListNum] = useState(1);
   const listLength = lists.length;
-
+  const random = lists.sort(() => Math.random() - 0.5);
   const settings = {
     infinite: true,
     speed: 500,
@@ -17,6 +17,7 @@ function NewListItem({ lists }: NewListItemProps) {
     arrows: false,
     afterChange: (listNum: number) => setListNum(listNum + 1),
   };
+
   return (
     <>
       <h3 className="title h3">이달의 신작</h3>
@@ -25,7 +26,7 @@ function NewListItem({ lists }: NewListItemProps) {
       </p>
       <div className="newListWrap2">
         <Slider {...settings}>
-          {lists.map((list) => (
+          {random.map((list) => (
             <div className="list" key={list.id}>
               <img
                 className="img"
