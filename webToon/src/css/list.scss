@@ -2,11 +2,13 @@
 body {
   font-family: Arial, sans-serif;
 }
+
 input,
 button {
   border: none;
   outline: none;
 }
+
 ul,
 li,
 div,
@@ -14,9 +16,11 @@ p {
   padding: 0;
   margin: 0;
 }
+
 li {
   list-style: none;
 }
+
 a {
   display: block;
   height: 42px;
@@ -29,6 +33,7 @@ a {
   text-decoration: none;
   font-size: 15px;
 }
+
 .list {
   font-size: 12px;
 }
@@ -55,23 +60,24 @@ a {
 
 .tabMenu {
   position: relative;
-}
-.tabMenu ul {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: stretch;
-  justify-content: space-evenly;
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: stretch;
+    justify-content: space-evenly;
+  }
 }
 
 .tabMenu2 {
   position: absolute;
   left: 0;
   width: 100%;
+  ul {
+    border-bottom: 1px solid #ebebeb;
+    background: #f8f8f9;
+  }
 }
-.tabMenu2 ul {
-  border-bottom: 1px solid #ebebeb;
-  background: #f8f8f9;
-}
+
 .wrap {
   max-width: 700px;
   border: 1px solid #ebebeb;
@@ -88,24 +94,25 @@ a {
   margin: 20px 20px 0;
   padding: 0 0 20px;
   border-bottom: 5px solid #eee;
+
+  ul {
+    width: 2800%;
+    display: flex;
+  }
+
+  li {
+    float: left;
+    width: 680px;
+  }
+  .slick-slide {
+    float: left;
+  }
 }
 .newListWrap2 {
   padding: 0;
   margin-left: 20px;
   position: relative;
   overflow: hidden;
-}
-.newListWrap ul {
-  width: 2800%;
-  display: flex;
-}
-
-.newListWrap li {
-  float: left;
-  width: 680px;
-}
-.slick-slide {
-  float: left;
 }
 
 .title {
@@ -139,10 +146,9 @@ select {
 .webToonList {
   margin: 20px;
   overflow: hidden;
-}
-
-.webToonList ul li {
-  float: left;
-  width: 33.33%;
-  margin-bottom: 20px;
+  ul li {
+    float: left;
+    width: 33.33%;
+    margin-bottom: 20px;
+  }
 }
