@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { List } from "../api/data";
 import Slider from "react-slick";
 type NewListItemProps = {
@@ -8,7 +8,6 @@ type NewListItemProps = {
 function NewListItem({ lists }: NewListItemProps) {
   const [listNum, setListNum] = useState(1);
   const listLength = lists.length;
-  const random = lists.sort(() => Math.random() - 0.5);
   const settings = {
     infinite: true,
     speed: 500,
@@ -26,7 +25,7 @@ function NewListItem({ lists }: NewListItemProps) {
       </p>
       <div className="newListWrap2">
         <Slider {...settings}>
-          {random.map((list) => (
+          {lists.map((list) => (
             <div className="list" key={list.id}>
               <img
                 className="img"

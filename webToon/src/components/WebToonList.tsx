@@ -27,6 +27,7 @@ function listSort(arr: List[], key: any) {
 function WebToonList() {
   const location = useLocation();
   const [day, setDay]: any = useState(today);
+  const random = newWebToonList.sort(() => Math.random() - 0.5);
 
   useEffect(() => {
     const opt = qs.parse(location.search, { ignoreQueryPrefix: true })["week"];
@@ -40,7 +41,7 @@ function WebToonList() {
   return (
     <div className="listWrap">
       <WebToonListFilter day={day} />
-      <NewListItem lists={newWebToonList} />
+      <NewListItem lists={random} />
       <div className="webToonList">
         <ul>
           {listSort(webToonList, qs.parse(location.search).option).map((list) =>
