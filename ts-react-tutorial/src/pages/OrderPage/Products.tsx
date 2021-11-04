@@ -1,5 +1,5 @@
 import React from "react";
-import { url } from "../../mocks/handler";
+import { url } from "../../mocks/api";
 
 type ProductsProps = {
   name: string;

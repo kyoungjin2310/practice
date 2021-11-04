@@ -1,31 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { url } from "../../mocks/handler";
+import { url } from "../../mocks/api";
 import Product from "./Products";
 import Options from "./Options";
-import ErrorBanner from "../../components/ErrorBanner";
-const type = ({ orderType }: any) => {
+const Type = ({ orderType }: any) => {
   //data를 state에 넣음(handler.ts)
   const [items, setItems] = useState([]);
   const [error, setError] = useState(false);
-
-  useEffect(() => {
-    loadItems(orderType);
-  }, [orderType]);
-
-  const loadItems = async (orderType: any) => {
-    try {
-      let response = await axios.get(`${url}/${orderType}`);
-      setItems(response.data);
-    } catch (e) {
-      console.error(e);
-      setError(true);
-    }
-  };
-
-  if (error) {
-    return <ErrorBanner message="에러가 발생했습니다" />;
-  }
 
   type ProductProps = {
     name: string;
@@ -40,7 +21,20 @@ const type = ({ orderType }: any) => {
     )
   );
 
-  return <div>{optionItem}</div>;
+  return (
+    <>
+      <h2>주문 종류</h2>
+      <p>하나의 가격</p>
+      <p>총 가격: </p>
+      <div
+        style={{
+          display: "flex",
+        }}
+      >
+        {optionItem}
+      </div>
+    </>
+  );
 };
 
-export default type;
+export default Type;

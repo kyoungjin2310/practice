@@ -1,37 +1,33 @@
-import React, { useState, MouseEvent } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
+import OrderPage from "./pages/OrderPage/OrderPage";
+import axios from "axios";
 
 function App() {
-  const [num, setNum] = useState(0);
-  const [disabled, setDisabled] = useState(false);
+  const [state, setState] = useState("");
+  const [data, setData] = useState({ product: [] });
+  const [isError, setIsError] = useState(false);
+  const { product } = data;
 
-  const increase = (e: MouseEvent) => {
-    e.preventDefault();
-    if (!disabled) {
-      setNum((num) => num + 1);
-    }
-  };
-
-  const decrease = (e: MouseEvent) => {
-    e.preventDefault();
-    if (!disabled) {
-      setNum((num) => num - 1);
-    }
-  };
-
-  const onOff = (e: MouseEvent) => {
-    e.preventDefault();
-    setDisabled(!disabled);
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsError(false);
+      try {
+        const result = await axios.get("order");
+        setData(result.data);
+        console.log(result.data);
+        console.log("44");
+      } catch (error) {
+        setIsError(true);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
-    <div className="App">
-      <p>{num}</p>
-      <button onClick={increase}>+</button>
-      <button onClick={decrease}>-</button>
-      <button onClick={onOff} className={disabled ? "disabled" : undefined}>
-        ON/OFF
-      </button>
+    <div>
+      <p>{product}</p>
+      {/* <OrderPage /> */}
     </div>
   );
 }
