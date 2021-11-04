@@ -1,7 +1,7 @@
 import React, { useState, MouseEvent } from "react";
 import "./App.css";
 
-function App() {
+function Counter() {
   const [num, setNum] = useState(0);
   const [disabled, setDisabled] = useState(false);
 
@@ -25,7 +25,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="Counter">
       <p>{num}</p>
       <button onClick={increase}>+</button>
       <button onClick={decrease}>-</button>
@@ -36,4 +36,4 @@ function App() {
   );
 }
 
-export default App;
+export default Counter;
