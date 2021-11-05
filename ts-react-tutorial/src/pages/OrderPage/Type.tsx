@@ -3,23 +3,32 @@ import React, { useEffect, useState } from "react";
 import { url } from "../../mocks/api";
 import Product from "./Products";
 import Options from "./Options";
+import { client } from "../../mocks/api";
 const Type = ({ orderType }: any) => {
   //data를 state에 넣음(handler.ts)
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState({ [`${orderType}`]: [] });
   const [error, setError] = useState(false);
+
+  useEffect(() => {
+    console.log(axios.defaults.baseURL);
+    const fetchData = async () => {
+      setError(false);
+      try {
+        const result = await client.get("/order");
+        setItems(result.data);
+        console.log(result.data);
+      } catch (error) {
+        setError(true);
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
 
   type ProductProps = {
     name: string;
     imagePath: string;
   };
-
-  const optionItem = items.map((item: ProductProps) =>
-    orderType === "products" ? (
-      <Product key={item.name} name={item.name} imagePath={item.imagePath} />
-    ) : (
-      <Options name={item.name} />
-    )
-  );
 
   return (
     <>
@@ -31,7 +40,19 @@ const Type = ({ orderType }: any) => {
           display: "flex",
         }}
       >
-        {optionItem}
+        {items[orderType]
+          ? items[orderType].map((item: ProductProps) =>
+              orderType === "products" ? (
+                <Product
+                  key={item.name}
+                  name={item.name}
+                  imagePath={item.imagePath}
+                />
+              ) : (
+                <Options name={item.name} />
+              )
+            )
+          : null}
       </div>
     </>
   );
