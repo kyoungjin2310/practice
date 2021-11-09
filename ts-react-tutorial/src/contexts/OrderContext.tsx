@@ -6,11 +6,18 @@ type ValueType = {
   orderType: string;
 };
 
+type OrderCountsProps =  {
+  products: Map<any, any>;
+  options: Map<any, any>;
+}
 let nameAgeMapping = new Map();
 
-export const OrderContext = createContext<Map<any, any> | null>(null);
+type Arrayish = { [n: string]: string };
+type A = keyof Arrayish;
 
-export const OrderContextProvider = (props: Map<any, any | null>) => {
+export const OrderContext = createContext<ValueType | null>(null);
+
+export const OrderContextProvider = (props: OrderCountsProps) => {
   const [orderCounts, setOrderCounts] = useState({
     //Map 간단한 키와 값을 서로 연결(매핑)시켜 저장
     //저장된 순서대로 각 요소들을 반복적으로 접근
