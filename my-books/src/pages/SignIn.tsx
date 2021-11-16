@@ -1,7 +1,8 @@
 import React from "react";
+import SigninContainer from "../containers/SigninContainer";
 
 const SignIn = () => {
-  return <div></div>;
+  return <SigninContainer />;
 };
 
 export default SignIn;
