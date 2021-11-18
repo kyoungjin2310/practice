@@ -1,4 +1,7 @@
-import { createActions, handleActions } from "redux-actions";
+import { takeEvery, put, call } from "@redux-saga/core/effects";
+import { createActions, handleActions, Action } from "redux-actions";
+import { loginFn, logoutFn } from "../../services/UserService";
+import { LoginReqType } from "../../type";
 
 type AuthState = {
   token: string | null;
@@ -15,7 +18,12 @@ const initialState: AuthState = {
 const prefix = "my-books/auth";
 
 //앞에 prefix가 붙음
-export const {} = createActions("PENDING", "SUCCESS", "FAIL", { prefix });
+export const { pending, success, fail } = createActions(
+  "PENDING",
+  "SUCCESS",
+  "FAIL",
+  { prefix }
+);
 
 const reducer = handleActions<AuthState, string>(
   {
@@ -43,4 +51,20 @@ const reducer = handleActions<AuthState, string>(
 export default reducer;
 
 //saga
-export function* authSaga() {}
+export const { login, logout } = createActions("LOGIN", "LOGOUT", { prefix });
+
+function* loginSaga(action: Action<LoginReqType>) {
+  try {
+    yield put(pending());
+    const token: string = yield call(loginFn, action.payload);
+    yield put(success(token));
+  } catch (error: any) {
+    yield put(fail(new Error(error?.response?.data.error || "Error")));
+  }
+}
+function* logoutSaga() {}
+
+export function* authSaga() {
+  yield takeEvery(`${prefix}/LOGIN`, loginSaga);
+  yield takeEvery(`${prefix}/LOGOUT`, logoutSaga);
+}
