@@ -1,8 +1,20 @@
 import React, { useRef } from "react";
+import { LoginReqType } from "../type";
 
-const Signin = () => {
+type SinginProps = {
+  login: (reqData: LoginReqType) => void;
+};
+
+//로그인 요청
+const Signin = ({ login }: SinginProps) => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+
+  const onClick = () => {
+    const email = emailRef.current!.value;
+    const password = passwordRef.current!.value;
+    login({ email, password });
+  };
 
   return (
     <div>
@@ -17,8 +29,8 @@ const Signin = () => {
         placeholder="email"
       />
       <label htmlFor="password">Password</label>
-      <input type="password" name="password" id="password" />
-      <button>Sign In</button>
+      <input type="password" name="password" id="password" ref={passwordRef} />
+      <button onClick={onClick}>Sign In</button>
     </div>
   );
 };
