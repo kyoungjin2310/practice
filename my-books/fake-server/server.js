@@ -8,7 +8,7 @@ const server = jsonServer.create();
 const path = require("path");
 const middlewares = jsonServer.defaults();
 
-const userdb = JSON.parse(fs.readFileSync(__dirname, "user.json", "utf-8"));
+const userdb = JSON.parse(fs.readFileSync("./fake-server/users.json", "utf-8"));
 const router = jsonServer.router(path.join(__dirname, "data.json"));
 const port = process.env.PORT || 4000;
 
@@ -61,8 +61,10 @@ server.post("/api/auth/register", (req, res) => {
       res.status(status).json({ status, message });
       return;
     }
-    let data = JSON.parse(data.toString());
+    data = JSON.parse(data.toString());
+
     let last_item_id = data.users[data.users.length - 1].id;
+
     data.users.push({ id: last_item_id + 1, email: email, password });
     let writeData = fs.writeFile(
       "./users.json",
