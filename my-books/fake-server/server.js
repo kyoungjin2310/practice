@@ -89,6 +89,8 @@ server.post("/api/auth/login", (req, res) => {
     res.status(status).json({ status, message });
     return;
   }
+  const access_token = createToken({ email, password });
+  res.status(200).json({ access_token });
 });
 
 server.listen(port, () => {
