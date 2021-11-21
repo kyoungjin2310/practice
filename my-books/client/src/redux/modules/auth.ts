@@ -1,6 +1,7 @@
 import { takeEvery, put, call } from "@redux-saga/core/effects";
 import { createActions, handleActions, Action } from "redux-actions";
-import { loginFn, logoutFn } from "../../services/UserService";
+import TokenService from "../../services/TokenService";
+import UserService from "../../services/UserService";
 import { LoginReqType } from "../../type";
 
 type AuthState = {
@@ -56,7 +57,8 @@ export const { login, logout } = createActions("LOGIN", "LOGOUT", { prefix });
 function* loginSaga(action: Action<LoginReqType>) {
   try {
     yield put(pending());
-    const token: string = yield call(loginFn, action.payload);
+    const token: string = yield call(UserService.login, action.payload);
+    TokenService.set(token);
     yield put(success(token));
   } catch (error: any) {
     yield put(fail(new Error(error?.response?.data.error || "Error")));

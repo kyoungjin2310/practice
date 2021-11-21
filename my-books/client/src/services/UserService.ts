@@ -6,12 +6,18 @@ import { LoginReqType } from "../type";
 dotenv.config();
 
 const USER_API_URL = process.env.REACT_APP_BASIC_SERVER_URL;
-export const loginFn = async (reqData: LoginReqType): Promise<string> => {
-  const response = await axios.post(`${USER_API_URL}/api/auth/login`, reqData);
-  return response.data.access_token;
-};
-export const logoutFn = async (token: string): Promise<void> => {
-  await axios.delete(`${USER_API_URL}/api/auth/login`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-};
+
+export default class UserService {
+  public static async login(reqData: LoginReqType): Promise<string> {
+    const response = await axios.post(
+      `${USER_API_URL}/api/auth/login`,
+      reqData
+    );
+    return response.data.access_token;
+  }
+  public static async logout(token: string): Promise<void> {
+    await axios.delete(`${USER_API_URL}/api/auth/login`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
+}
