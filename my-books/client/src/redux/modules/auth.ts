@@ -64,11 +64,14 @@ function* logoutSaga() {
   try {
     yield put(pending());
     const token: string = yield select((state) => state.auth.token);
+    yield call(UserService.logout, token);
     TokenService.set(token);
     yield put(success(token));
     yield put(push("/"));
   } catch (error: any) {
-    yield put(fail(new Error(error?.response?.data.error || "Error")));
+  } finally {
+    TokenService.remove();
+    yield put(success(null));
   }
 }
 
