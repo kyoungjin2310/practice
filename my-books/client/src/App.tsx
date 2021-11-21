@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { ErrorBoundary } from "react-error-boundary";
 import Add from "./pages/Add";
 import Detail from "./pages/Detail";
@@ -8,11 +8,13 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import SignIn from "./pages/SignIn";
 import Error from "./pages/Error";
+import { ConnectedRouter } from "connected-react-router";
+import history from "./history";
 
 function App() {
   return (
     <ErrorBoundary FallbackComponent={Error}>
-      <BrowserRouter>
+      <ConnectedRouter history={history}>
         {/*에러가 발생했을때 FallbackComponent로 연결 시켜줌*/}
         <Switch>
           {/* 책 정보 편집 */}
@@ -28,7 +30,7 @@ function App() {
           {/* 페이지가 없는 경우 - 컴포넌트만 작성*/}
           <Route component={NotFound}></Route>
         </Switch>
-      </BrowserRouter>
+      </ConnectedRouter>
     </ErrorBoundary>
   );
 }

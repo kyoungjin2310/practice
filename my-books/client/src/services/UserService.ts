@@ -5,7 +5,7 @@ import { LoginReqType } from "../type";
 
 dotenv.config();
 
-const USER_API_URL = process.env.REACT_APP_BASIC_SERVER_URL;
+const USER_API_URL = process.env.SERVER_URL;
 
 export default class UserService {
   public static async login(reqData: LoginReqType): Promise<string> {
@@ -13,7 +13,7 @@ export default class UserService {
       `${USER_API_URL}/api/auth/login`,
       reqData
     );
-    return response.data.access_token;
+    return response.data.token;
   }
   public static async logout(token: string): Promise<void> {
     await axios.delete(`${USER_API_URL}/api/auth/login`, {

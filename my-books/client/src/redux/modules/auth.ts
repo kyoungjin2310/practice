@@ -1,14 +1,9 @@
-import { takeEvery, put, call } from "@redux-saga/core/effects";
+import { takeEvery, put, call, select } from "@redux-saga/core/effects";
+import { push } from "connected-react-router";
 import { createActions, handleActions, Action } from "redux-actions";
 import TokenService from "../../services/TokenService";
 import UserService from "../../services/UserService";
-import { LoginReqType } from "../../type";
-
-type AuthState = {
-  token: string | null;
-  loading: boolean;
-  error: Error | null;
-};
+import { AuthState, LoginReqType } from "../../type";
 
 const initialState: AuthState = {
   token: null,
@@ -60,11 +55,22 @@ function* loginSaga(action: Action<LoginReqType>) {
     const token: string = yield call(UserService.login, action.payload);
     TokenService.set(token);
     yield put(success(token));
+    yield put(push("/"));
   } catch (error: any) {
     yield put(fail(new Error(error?.response?.data.error || "Error")));
   }
 }
-function* logoutSaga() {}
+function* logoutSaga() {
+  try {
+    yield put(pending());
+    const token: string = yield select((state) => state.auth.token);
+    TokenService.set(token);
+    yield put(success(token));
+    yield put(push("/"));
+  } catch (error: any) {
+    yield put(fail(new Error(error?.response?.data.error || "Error")));
+  }
+}
 
 export function* authSaga() {
   yield takeEvery(`${prefix}/LOGIN`, loginSaga);

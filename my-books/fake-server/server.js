@@ -64,8 +64,8 @@ server.post("/api/auth/register", (req, res) => {
       }
     );
   });
-  const access_token = createToken({ email, password });
-  res.status(200).json({ access_token });
+  const token = createToken({ email, password });
+  res.status(200).json({ token });
 });
 
 server.post("/api/auth/login", (req, res) => {
@@ -76,8 +76,8 @@ server.post("/api/auth/login", (req, res) => {
     res.status(status).json({ status, message });
     return;
   }
-  const access_token = createToken({ email, password });
-  res.status(200).json({ access_token });
+  const token = createToken({ email, password });
+  res.status(200).json({ token });
 });
 
 server.listen(4000, () => {
