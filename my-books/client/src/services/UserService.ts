@@ -7,11 +7,11 @@ dotenv.config();
 
 const USER_API_URL = process.env.REACT_APP_BASIC_SERVER_URL;
 export const loginFn = async (reqData: LoginReqType): Promise<string> => {
-  const response = await axios.post(`${USER_API_URL}/login`, reqData);
-  return response.data.token;
+  const response = await axios.post(`${USER_API_URL}/api/auth/login`, reqData);
+  return response.data.access_token;
 };
 export const logoutFn = async (token: string): Promise<void> => {
-  await axios.delete(`${USER_API_URL}/login`, {
+  await axios.delete(`${USER_API_URL}/api/auth/login`, {
     headers: { Authorization: `Bearer ${token}` },
   });
 };
