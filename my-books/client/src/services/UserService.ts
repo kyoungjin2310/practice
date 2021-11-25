@@ -10,14 +10,14 @@ const USER_API_URL = process.env.SERVER_URL;
 export default class UserService {
   public static async login(reqData: LoginReqType): Promise<string> {
     const response = await axios.post(
-      `${USER_API_URL}/api/auth/login`,
+      `http://localhost:4000/api/auth/login`,
       reqData
     );
-    return response.data.token;
+    return response.data.access_token;
   }
-  public static async logout(token: string): Promise<void> {
-    await axios.delete(`${USER_API_URL}/api/auth/login`, {
-      headers: { Authorization: `Bearer ${token}` },
+  public static async logout(access_token: string): Promise<void> {
+    await axios.delete(`http://localhost:4000/api/auth/login`, {
+      headers: { Authorization: `Bearer ${access_token}` },
     });
   }
 }
