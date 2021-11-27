@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "@material-ui/core";
 
-const Header = ({ logoutUser, setLogoutUser }) => {
+type HeaderProps = {
+  logoutUser: Boolean;
+  setLogoutUser: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const Header = ({ logoutUser, setLogoutUser }: HeaderProps) => {
   const [login, setLogin] = useState("");
 
   useEffect(() => {
@@ -29,23 +33,12 @@ const Header = ({ logoutUser, setLogoutUser }) => {
     <div>
       <header style={{ marginTop: "20px" }}>
         {!logoutUser && login && login.userLogin ? (
-          <Button
-            style={{ width: "100px" }}
-            variant="contained"
-            color="secondary"
-            onClick={logout}
-          >
+          <button color="secondary" onClick={logout}>
             Logout
-          </Button>
+          </button>
         ) : (
           <Link to="/login">
-            <Button
-              style={{ width: "100px" }}
-              variant="contained"
-              color="secondary"
-            >
-              Login
-            </Button>
+            <button color="secondary">Login</button>
           </Link>
         )}
       </header>
