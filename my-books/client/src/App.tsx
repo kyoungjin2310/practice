@@ -47,7 +47,7 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Header logoutUser={logoutUser} setLogoutUser={setLogoutUser} />
-            <Home logoutUser={logoutUser} />
+            <Home />
           </Route>
           <Route path="/login">
             <Login setLogoutUser={setLogoutUser} />

@@ -1,27 +1,14 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
 import { useHistory, Link } from "react-router-dom";
 import axiox from "axios";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& > *": {
-      margin: theme.spacing(1),
-      width: "45ch",
-    },
-  },
-}));
-
-const Register = ({ setLogoutUser }) => {
-  const classes = useStyles();
+const Register = ({ setLogoutUser }: any) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   let history = useHistory();
 
-  const register = (e) => {
+  const register = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     axiox
       .post("http://localhost:5000/api/auth/register", {
@@ -49,36 +36,24 @@ const Register = ({ setLogoutUser }) => {
     <div style={{ marginTop: "100px" }}>
       <h2>Register Page</h2>
       {error && <p style={{ color: "red" }}>{error}</p>}
-      <form
-        className={classes.root}
-        noValidate
-        autoComplete="off"
-        onSubmit={register}
-      >
-        <TextField
+      <form noValidate autoComplete="off" onSubmit={register}>
+        <input
           id="username"
-          label="Username"
           type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <br />
-        <TextField
+        <input
           id="password"
-          label="Password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <br />
-        <Button
-          style={{ width: "100px" }}
-          variant="contained"
-          color="primary"
-          type="submit"
-        >
+        <button color="primary" type="submit">
           Register
-        </Button>
+        </button>
       </form>
       <p>
         Already have an account then please <Link to="/login">Login</Link>

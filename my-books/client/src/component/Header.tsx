@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Key } from "react";
 import { Link } from "react-router-dom";
 
 type HeaderProps = {
@@ -7,7 +7,7 @@ type HeaderProps = {
 };
 
 const Header = ({ logoutUser, setLogoutUser }: HeaderProps) => {
-  const [login, setLogin] = useState("");
+  const [login, setLogin] = useState<any>("");
 
   useEffect(() => {
     hydrateStateWithLocalStorage();
@@ -20,7 +20,7 @@ const Header = ({ logoutUser, setLogoutUser }: HeaderProps) => {
 
   const hydrateStateWithLocalStorage = () => {
     if (localStorage.hasOwnProperty("login")) {
-      let value = localStorage.getItem("login");
+      let value: any = localStorage.getItem("login");
       try {
         value = JSON.parse(value);
         setLogin(value);

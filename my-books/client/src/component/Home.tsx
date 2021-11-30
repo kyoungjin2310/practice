@@ -18,7 +18,7 @@ const Home = () => {
   );
   return (
     <div style={{ marginTop: "100px" }}>
-      {isLoginTrue && isLoginTrue.userLogin ? (
+      {isLoginTrue && isLoginTrue?.userLogin ? (
         <h2>Welcome Back User</h2>
       ) : (
         <>{userNotLogin()}</>
