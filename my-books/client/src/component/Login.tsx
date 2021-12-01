@@ -11,7 +11,7 @@ const Login = ({ setLogoutUser }: any) => {
   const login = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     axiox
-      .post("http://localhost:5000/api/auth/login", {
+      .post("/api/auth/login", {
         email,
         password,
       })
