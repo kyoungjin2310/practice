@@ -68,7 +68,7 @@ function* logoutSaga() {
     TokenService.set(token);
     yield put(success(token));
     yield put(push("/"));
-  } catch (error: any) {
+  } catch (error) {
   } finally {
     TokenService.remove();
     yield put(success(null));
