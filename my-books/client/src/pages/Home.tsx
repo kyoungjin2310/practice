@@ -10,7 +10,7 @@ const Home = () => {
     (state) => state.auth.token
   );
   if (token === null) {
-    return <Redirect to="/singin" />;
+    return <Redirect to="/signin" />;
   }
   const click = () => {
     dispatch(logout());

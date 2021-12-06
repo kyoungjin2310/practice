@@ -81,5 +81,5 @@ server.post("/api/auth/login", (req, res) => {
 });
 
 server.listen(5000, () => {
-  console.log("Running fake api json serve");
+  console.log("Running fake api json server");
 });
