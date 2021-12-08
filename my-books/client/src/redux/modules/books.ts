@@ -1,4 +1,6 @@
-import { createActions } from "redux-actions";
+import { createActions, handleActions } from "redux-actions";
+
+interface Book {}
 
 interface BooksState {
   books: Book[] | null;
@@ -7,17 +9,38 @@ interface BooksState {
 }
 
 const initialState: BooksState = {
-    books: null,
-    loading: false,
-    error: null,
-}
+  books: null,
+  loading: false,
+  error: null,
+};
 
 const prefix = "my-books/books";
 
-export const {pending, success, fail} = createActions('PENDING'. 'SUCCESS', 'FAIL', {prefix})
+export const { pending, success, fail } = createActions(
+  "PENDING",
+  "SUCCESS",
+  "FAIL",
+  { prefix }
+);
 
-const reducer = hendleActions<BooksState, Book>({
-    PENDING:(state)=>({}),
-    SUCCESS:()=>({}),
-    FAIL:()=>({})
-}, initialState, {prefix})
+const reducer = handleActions<BooksState, Book[]>(
+  {
+    PENDING: (state) => ({ ...state, loading: true, error: null }),
+    SUCCESS: (state, aciton) => ({
+      books: aciton.payload,
+      loading: false,
+      error: null,
+    }),
+    FAIL: (state, action: any) => ({
+      ...state,
+      loading: false,
+      error: action.payload,
+    }),
+  },
+  initialState,
+  { prefix }
+);
+
+export default reducer;
+
+export function* booksSage() {}
