@@ -1,0 +1,1 @@
+const: Layout: React.FC = ({children}) => (<div className={}></div>)
