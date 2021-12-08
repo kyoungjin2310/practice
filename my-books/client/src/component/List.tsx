@@ -1,13 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { BookType } from "../type";
+import Layout from "./Layout";
 
-const List = () => {
-  const click = () => {};
+type ListProps = {
+  books: BookType[] | null;
+  loading: boolean;
+};
+
+const List: React.FC<ListProps> = ({ books, loading }) => {
+  const logout = () => {};
+  const goAdd = () => {};
+
+  useEffect(() => {}, []);
 
   return (
-    <div>
-      <h1>home</h1>
-      <button onClick={click}>logout</button>
-    </div>
+    <Layout>
+      <div>Book List</div>
+      <button onClick={goAdd}>Add Book</button>
+      <button onClick={logout}>Logout</button>
+      <div>
+        <ul>
+          <li>
+            <h2>Book</h2>
+          </li>
+        </ul>
+      </div>
+    </Layout>
   );
 };
 
