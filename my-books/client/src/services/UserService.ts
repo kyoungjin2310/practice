@@ -5,7 +5,7 @@ import { LoginReqType } from "../type";
 
 dotenv.config();
 
-const USER_API_URL = process.env.REACT_APP_SERVER_URL;
+export const USER_API_URL = process.env.REACT_APP_SERVER_URL;
 
 export default class UserService {
   public static async login(reqData: LoginReqType): Promise<string> {

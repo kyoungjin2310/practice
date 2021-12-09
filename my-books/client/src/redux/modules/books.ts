@@ -1,3 +1,4 @@
+import { call, put, select, takeLatest } from "@redux-saga/core/effects";
 import { createActions, handleActions } from "redux-actions";
 import { BooksState, BookType } from "../../type";
 
@@ -36,4 +37,18 @@ const reducer = handleActions<BooksState, BookType[]>(
 
 export default reducer;
 
-export function* booksSage() {}
+export const { getBooks } = createActions("GET_BOOKS", {
+  prefix,
+});
+
+function* getBooksSaga() {
+  try {
+    yield put(pending());
+    const token: string = yield select((state) => state.auth.token);
+    const books: BookType[] = yield call();
+  } catch (error) {}
+}
+
+export function* booksSage() {
+  yield takeLatest(`${prefix}/GET_BOOKS`, getBooksSaga);
+}
