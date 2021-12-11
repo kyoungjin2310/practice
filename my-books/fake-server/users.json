@@ -1,1 +1,52 @@
-{"users":[{"id":1,"email":"vishal@gmail.com","password":"12345678"},{"id":2,"email":"vishal1@gmail.com","password":"12345678"},{"id":3,"email":"vishal2@gmail.com","password":"12345678"},{"id":4,"email":"vishal4@gmail.com","password":"12345678"},{"id":5,"email":"vishal4@gmail.com","password":"12345678"},{"id":6,"email":"aaa@gmail.com","password":"123456"},{"id":7,"email":"bbb@gmail.com","password":"123456"}]}
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "vishal@gmail.com",
+      "password": "12345678",
+      "books": [
+        {
+          "id": 1,
+          "book_name": "Basic Grammar in Use with Answers 4/E",
+          "book_text": "The world's best-selling grammar series for learners of English. Basic Grammar in Use Fourth Edition is an American English self-study reference and practice book for beginner level learners (A1-B1). With simple explanations, clear examples, and easy to understand exercises, it is perfect for students who are learning on their own, but can also be used in the classroom. It comes with an easy to use answer key in the back of the book."
+        },
+        {
+          "id": 2,
+          "book_name": "Grammar in Use Intermediate Student's Book with Answers",
+          "book_text": "G rammar in Use Intermediate은 중급 학습자들이 자가 학습 및 수업시간에 활용할 수 있는 교재입니다. 명료한 설명과 충분한 연습문제들이 수록된 네 번째 개정판을 통해 중고급 학습자들은 자신의 수준에 필요한 모든 문법 영역을 학습할 수 있습니다. 해당 유닛의 핵심 문법을 왼쪽 페이지에서 학습하고 그에 대한 연습문제를 오른쪽 페이지에서 풀어보는 대면식 구성을 통해 학습한 내용에 대한 즉각적인 피드백이 가능합니다. 전 세계의 수백만 학습자와 교사들을 통해 검증된 문법을 바탕으로 학습자들은 실생활에서 실제로 사용하는 최신의 유용한 문법을 학습할 수 있습니다."
+        },
+        {
+          "id": 3,
+          "book_name": "디즈니 엔칸토 마법의 세계 무비동화",
+          "book_text": "이곳에서 태어난 아이들은 모두 특별한 마법 능력을 선물로 받습니다. 미라벨의 엄마는 음식으로 아픈 사람을 낫게 하고, 첫째 언니는 아름다운 꽃을 마음껏 피워 내며, 둘째 언니는 황소보다도 힘이 세지요. 이렇게 놀랍고 뛰어난 가족들 사이에서, 미라벨은 유일하게 마법의 힘을 선물받지 못한 평범한 아이입니다. 그러던 어느 날, 미라벨이 너무나도 사랑하는 엔칸토와 가족 전체에 위기가 닥쳐옵니다. 그런데 그 위기를 알아채는 것도, 해결할 수 있는 것도 오직 미라벨 뿐이네요! 과연 이 평범한 소녀는 가족들을 구하고 자신의 특별함도 발견할 수 있을까요?"
+        },
+        {
+          "id": 4,
+          "book_name": "돈의 속성(150쇄 기념 에디션)",
+          "book_text": "맨손에서 만들어낸 종잣돈으로 돈 버는 방법을 알려준다. 부모에게 받은 유산은 커녕, 30대 후반까지 낡은 자동차에 그날 판매할 과일을 싣고 다니던 어느 가난한 이민 가장이 이룬 진짜 부에 대한 모든 방법이 담겼다. 종잣돈 천만 원을 만들고 그 돈을 1억 원, 10억 원, 100억 원, 수천억 원이 될 때까지 돈을 관리하며 터득한 ‘돈’이 가진 속성을 정리한 안내서다. ‘진짜 부자’가 된 실제 인물이 말해주는 ‘진짜 돈’만들기에 대한 책이다."
+        },
+        {
+          "id": 5,
+          "book_name": "나는 장사의 신이다",
+          "book_text": "장사에 요령 같은 것은 없다. 마케팅을 잘하는 것도, 새로운 메뉴를 개발하는 것도 장사를 잘하기 위해 여러 방법을 시도하는 것도 중요하지만, 가장 중요한 것은 ‘진심’과 ‘간절함’이다. 고객을 대하는 진심은 통하고, 간절함은 성공의 요인이 된다. 이 책의 저자 은현장은 ‘장사의 신’으로 불린다. 가난했던 어린 시절 돈을 많이 벌겠다는 목표로 중국집과 피자가게, 칼국수집 등 배달일부터 시작해, 전국 200개 매장의 ‘후라이드참잘하는집’ 치킨 프랜차이즈를 창업했다. 그가 레드오션인 치킨 시장에서 꾸준한 성장세를 보이며 고객들의 사랑받는 치킨 브랜드로 입지를 구축하고, 폐점률 0%의 신화를 달성한 방법은 남다르다."
+        },
+        {
+          "id": 6,
+          "book_name": "한경무크 산업대전망 인더스트리 2022",
+          "book_text": "국내 최고 경제주간지 한경비즈니스와 한상춘 한국경제신문 논설위원, 하나금융투자 리서치센터가 손을 잡고 2022년 글로벌 산업 전망서를 펴냈다. 한상춘 위원은 대외경제정책연구원(KIEP) 선임연구원, 대우경제연구소 연구위원 겸 국제경제팀장 등을 지낸 후 한경미디어그룹에 합류해 한국경제신문과 한국경제TV 등에서 국제금융 대기자로 활약하고 있다. 하나금융투자 리서치센터는 자타공인 국내 증권업계의 최고 분석가 집단이다. 16명의 베스트 애널리스트들이 필진으로 참여해 각 산업별 최신 동향과 글로벌 트렌드를 일목요연하게 정리했다."
+        },
+        {
+          "id": 7,
+          "book_name": "세계미래보고서 2022: 메타 사피엔스가 온다",
+          "book_text": "이 책을 통해 전 세계 66개국, 4,500명의 전문가, 학자, 기업인이 연구분석한 거시적 미래 전망을 만나는 것은 설레고 흥미로운 일이다. 이번 책에서는 미래 전망을 제시하는 데서 나아가 가상의 시나리오까지 담음으로써 신인류 메타 사피엔스가 펼쳐낼 모험, 생존과 번영의 대서사시를 함께 경험하는 듯한 생동감을 전해준다. 《세계미래보고서》시리즈는 12년 연속 베스트셀러이자 누적 판매 65만 부를 달성한 스테디셀러로 자리매김했다. 우리가 맞이할 세상을 탐구하고 모험하는 여정을 오랫동안 독자들과 함께해왔다는 뜻이다. 《세계미래보고서 2022 : 메타 사피엔스가 온다》는 문명의 축이 바뀌고 부와 권력이 재편되는 세상에서 우리가 어디로, 어떻게 나아가야 할지를 알려주는 최적의 미래 지도가 될 것이다."
+        }
+      ]
+    },
+    { "id": 2, "email": "vishal1@gmail.com", "password": "12345678" },
+    { "id": 3, "email": "vishal2@gmail.com", "password": "12345678" },
+    { "id": 4, "email": "vishal4@gmail.com", "password": "12345678" },
+    { "id": 5, "email": "vishal4@gmail.com", "password": "12345678" },
+    { "id": 6, "email": "aaa@gmail.com", "password": "123456" },
+    { "id": 7, "email": "bbb@gmail.com", "password": "123456" }
+  ]
+}
