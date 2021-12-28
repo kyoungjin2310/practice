@@ -82,6 +82,21 @@ server.post("/api/auth/login", (req, res) => {
   res.status(200).json({ access_token });
 });
 
+server.post("/api/books/:id", (req, res) => {
+  const { email } = req.body;
+  if (isRegisterAuthenticated({ email })) {
+    const status = 200;
+    const message = "22";
+    res.status(status).json({ status, message });
+    return;
+  } else {
+    const status = 401;
+    const message = "";
+    res.status(status).json({ status, message });
+    return;
+  }
+});
+
 server.listen(5000, () => {
   console.log("Running fake api json server");
 });
