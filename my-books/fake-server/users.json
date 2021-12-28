@@ -42,11 +42,31 @@
         }
       ]
     },
-    { "id": 2, "email": "vishal1@gmail.com", "password": "12345678" },
-    { "id": 3, "email": "vishal2@gmail.com", "password": "12345678" },
-    { "id": 4, "email": "vishal4@gmail.com", "password": "12345678" },
-    { "id": 5, "email": "vishal4@gmail.com", "password": "12345678" },
-    { "id": 6, "email": "aaa@gmail.com", "password": "123456" },
-    { "id": 7, "email": "bbb@gmail.com", "password": "123456" }
+    {
+      "id": 2,
+      "email": "vishal1@gmail.com",
+      "password": "12345678",
+      "books": []
+    },
+    {
+      "id": 3,
+      "email": "vishal2@gmail.com",
+      "password": "12345678",
+      "books": []
+    },
+    {
+      "id": 4,
+      "email": "vishal4@gmail.com",
+      "password": "12345678",
+      "books": []
+    },
+    {
+      "id": 5,
+      "email": "vishal4@gmail.com",
+      "password": "12345678",
+      "books": []
+    },
+    { "id": 6, "email": "aaa@gmail.com", "password": "123456", "books": [] },
+    { "id": 7, "email": "bbb@gmail.com", "password": "123456", "books": [] }
   ]
 }

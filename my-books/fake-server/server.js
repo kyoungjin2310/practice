@@ -28,6 +28,10 @@ function isLoginAuthenticated({ email, password }) {
   );
 }
 
+function isBookFilter({ email }) {
+  return userdb.users.filter((user) => user.email !== email);
+}
+
 function isRegisterAuthenticated({ email }) {
   return userdb.users.findIndex((user) => user.email === email) !== -1;
 }
@@ -83,11 +87,10 @@ server.post("/api/auth/login", (req, res) => {
 });
 
 server.post("/api/books/:id", (req, res) => {
-  const { email } = req.body;
-  if (isRegisterAuthenticated({ email })) {
+  const { email, token } = req.body;
+  if (token) {
     const status = 200;
-    const message = "22";
-    res.status(status).json({ status, message });
+    res.status(status).json({ status, isBookFilter({ email }) });
     return;
   } else {
     const status = 401;
