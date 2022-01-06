@@ -419,9 +419,11 @@ jekyll_compose:
         - title: Project Link
           url: https://example.com
 
-# Tipue search settings
 tipue_search:
   include:
-    pages: true
+    pages: false
+    collections: []
   exclude:
-    files: [search.html]
+    files: []
+    categories: []
+    tags: []
