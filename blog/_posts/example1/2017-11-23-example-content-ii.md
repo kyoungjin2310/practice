@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Example Content II
+subtitle: subtitle 예시
+tags: 태그
 description: >
   A page showing how regular markdown content is styled in Hydejack.
 image: /assets/img/blog/example-content-ii.jpg
