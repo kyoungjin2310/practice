@@ -52,6 +52,8 @@ menu:
     url: /about/
   - title: 배운 것 정리
     url: /example1/
+  - title: Posts
+    url: /posts/
   - title: Box
     url: /example2/
   - title: Subcat
