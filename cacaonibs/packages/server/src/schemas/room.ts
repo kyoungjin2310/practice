@@ -1,7 +1,7 @@
+import sequelize from "../sequelize";
 import User from "./user";
 
-const { Sequelize, DataTypes } = require("sequelize");
-const sequelize = new Sequelize("sqlite::memory:");
+const { DataTypes } = require("sequelize");
 
 const Room = sequelize.define("room", {
   id: {
