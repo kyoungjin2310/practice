@@ -1,5 +1,6 @@
 import express, { Application } from "express";
 import sequelize from "./sequelize";
+import session from "express-session";
 import routes from "./routes";
 const app: Application = express();
 
