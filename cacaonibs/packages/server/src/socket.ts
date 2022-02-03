@@ -1,16 +1,17 @@
-const SocketID = require("socket.io");
+const SocketIO = require("socket.io");
 
 import { Application, NextFunction, RequestHandler } from "express";
 import { Server } from "net";
 import { Socket } from "socket.io";
 
-const socket = (server: Server, app: Application, session: ReferenceError) => {
-  const io = SocketID(server, {
+const socket = (server: Server, app: Application, session: RequestHandler) => {
+  const io = SocketIO(server, {
     path: "/socket.io",
     cors: {
       origin: "*",
     },
   });
+
   app.set("io", io);
 
   const chat = io.of("/chat");
@@ -24,9 +25,12 @@ const socket = (server: Server, app: Application, session: ReferenceError) => {
   });
 
   chat.on("connection", async (socket: Socket) => {
+    console.log("Connected to Chat", socket.id);
+
     socket.on("join", (roomId) => {
       socket.join(roomId);
     });
+
     socket.on("disconnect", (data) => {
       console.log("Disconnected to Chat");
     });

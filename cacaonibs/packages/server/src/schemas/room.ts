@@ -1,7 +1,6 @@
 import sequelize from "../sequelize";
+import { DataTypes } from "sequelize";
 import User from "./user";
-
-const { DataTypes } = require("sequelize");
 
 const Room = sequelize.define("room", {
   id: {
@@ -11,10 +10,10 @@ const Room = sequelize.define("room", {
   },
   opponentId: {
     type: DataTypes.UUID,
-    reference: {
-      model: User,
-    },
+    references: { model: User },
   },
 });
+
+Room.belongsTo(User, { foreignKey: "opponentId" });
 
 export default Room;

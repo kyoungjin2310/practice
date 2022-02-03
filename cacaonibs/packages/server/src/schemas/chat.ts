@@ -1,8 +1,8 @@
-import Room from "./room";
-import User from "./user";
-
-const { DataTypes } = require("sequelize");
 import sequelize from "../sequelize";
+import { DataTypes } from "sequelize";
+
+import User from "./user";
+import Room from "./room";
 
 const Chat = sequelize.define("chat", {
   id: {
@@ -11,21 +11,24 @@ const Chat = sequelize.define("chat", {
     autoIncrement: true,
   },
   //채팅 메시지 내용
-  constent: DataTypes.STRING,
+  content: DataTypes.STRING,
   //보내는 아이디
   senderId: {
     type: DataTypes.UUID,
-    reference: {
+    references: {
       model: User,
     },
   },
   //채팅방
   roomId: {
     type: DataTypes.INTEGER,
-    reference: {
+    references: {
       model: Room,
     },
   },
 });
+
+Chat.belongsTo(User, { foreignKey: "senderId" });
+Chat.belongsTo(Room, { foreignKey: "roomId" });
 
 export default Chat;

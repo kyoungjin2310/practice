@@ -1,9 +1,9 @@
-const { DataTypes } = require("sequelize");
 import sequelize from "../sequelize";
+import { DataTypes } from "sequelize";
 
 const User = sequelize.define("user", {
   id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUID,
     primaryKey: true,
     unique: true,
   },

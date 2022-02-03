@@ -20,9 +20,7 @@ router.get("/", async (req, res) => {
 router.get("/:roomId", async (req, res) => {
   try {
     const room = await Room.findOne({
-      where: {
-        id: Number(req.params.roomId),
-      },
+      where: { id: Number(req.params.roomId) },
       include: User,
     });
     res.json(room);
