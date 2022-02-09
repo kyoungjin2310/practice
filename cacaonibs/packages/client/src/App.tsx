@@ -10,15 +10,15 @@ function App() {
   return (
     <Routes>
       {/*main*/}
-      <Route index element={Lobby} />
+      <Route index element={<Lobby />} />
       {/*친구목록*/}
-      <Route path="/" element={Friends} />
+      <Route path="/friends" element={<Friends />} />
       {/*대화방*/}
-      <Route index element={RoomList} />
+      <Route path="/rooms" element={<RoomList />} />
       {/*대화방상세*/}
-      <Route index element={RoomDetail} />
+      <Route path="/rooms/:roomId" element={<RoomDetail />} />
       {/*더보기*/}
-      <Route index element={SeeMore} />
+      <Route path="/more" element={<SeeMore />} />
     </Routes>
   );
 }
