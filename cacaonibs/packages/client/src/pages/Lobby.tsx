@@ -1,5 +1,5 @@
 import React from "react";
-import BottomNavigation from "../components/BottomNavgation/BottomNavgation";
+import BottomNavigation from "../components/BottomNavigation";
 import TopNavigation from "../components/TopNavigation";
 
 const Lobby: React.FC = () => {
