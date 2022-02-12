@@ -1,4 +1,4 @@
-import axiosInstance from "../apis";
+import axiosInstance from ".";
 
 export interface MakeChatRoomRequest {
   opponentId: string;
