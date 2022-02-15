@@ -79,7 +79,8 @@ const Lobby: React.FC = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
   };
-
+  
+  //// 뮤테이션이 성공한다면, 쿼리의 데이터를 invalidate해 관련된 쿼리가 리패치되도록 만든다.
   const handleLogin = () => {
     mutation.mutate(username, {
       onSuccess: (data) => {
