@@ -1,41 +1,64 @@
-import express, { Application } from "express";
-import session from "express-session";
-import cors from "cors";
+import express = require("express");
+const argon2 = require("argon2");
+import jwt = require("jsonwebtoken");
+import cookiesParser = require("cookie-parser");
+const { validUser } = require("./middleware/auth");
+const app = express();
 
-import sequelize from "./sequelize";
-import routes from "./routes";
+const database = [
+  { id: 1, username: "abc", password: "abc", age: 22, birthday: "2002-02-22" },
+];
 
-const FileStore = require("session-file-store")(session);
+app.use(express.json());
+app.use(cookiesParser());
+app.use(express.urlencoded({ extended: false }));
 
-require("dotenv").config();
-
-const app: Application = express();
-
-const sessionMiddleware = session({
-  secret: "kakaonibs", // 쿠키를 임의로 변조하는것을 방지하기 위한 값 입니다. 이 값을 통하여 세션을 암호화 하여 저장합니다.
-  saveUninitialized: true, // 세션이 저장되기 전에 uninitialized 상태로 미리 만들어서 저장합니다.
-  cookie: { secure: false }, // one day
-  resave: false, //  세션을 언제나 저장할 지 (변경되지 않아도) 정하는 값입니다. express-session documentation에서는 이 값을 false 로 하는것을 권장하고 필요에 따라 true로 설정합니다.
-  store: new FileStore(),
+app.get("/users", (req, res) => {
+  res.send(database);
 });
 
-app.use(sessionMiddleware);
-app.use(
-  // for cors
-  cors({
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
+app.get("/secure_data", validUser, (req, res) => {
+  res.send("인증된 사용자만 쓸 수 있는 API");
+});
 
-app.use(express.json()); // for req.body
-app.use(express.urlencoded({ extended: true })); // for req.body
+type Props = {
+  id?: number;
+  username: string;
+  password: string;
+  age?: number;
+  birthday?: Date;
+};
 
-sequelize.sync({ force: true });
+app.post("/signup", async (req, res) => {
+  const { username, password, age, birthday }: Props = req.body;
+  const hash = await argon2.hash(password);
+  database.push({
+    username,
+    password: hash,
+    age,
+    birthday,
+  });
 
-app.use("/", routes);
+  const access_token = jwt.sign({ username }, "secure");
+  console.log(access_token);
+  res.send("success");
+});
 
-const server = app.listen(8000, () => {
-  console.log("start");
+app.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+  const user = database.filter((user) => {
+    return user.username === username;
+  });
+  if (user.length === 0) {
+    res.status(403).send("해당하는 id가 없습니다.");
+  }
+
+  if (!(await argon2.verify(user[0].password, password))) {
+    res.status(403).send("패스워드가 틀립니다.");
+  }
+  res.send("로그인 성공!");
+});
+
+app.listen(3000, () => {
+  console.log("server on!");
 });
