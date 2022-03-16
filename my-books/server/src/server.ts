@@ -1,13 +1,12 @@
-import express = require("express");
-const argon2 = require("argon2");
-import jwt = require("jsonwebtoken");
-import cookiesParser = require("cookie-parser");
-const { validUser } = require("./middleware/auth");
-const app = express();
+import express from "express";
+import * as argon2 from "argon2";
+import jwt from "jsonwebtoken";
+import cookiesParser from "cookie-parser";
+import { validUser } from "./middleware/auth";
 
-const database = [
-  { id: 1, username: "abc", password: "abc", age: 22, birthday: "2002-02-22" },
-];
+import { database } from "./data";
+import { Props } from "./type";
+const app = express();
 
 app.use(express.json());
 app.use(cookiesParser());
@@ -20,14 +19,6 @@ app.get("/users", (req, res) => {
 app.get("/secure_data", validUser, (req, res) => {
   res.send("인증된 사용자만 쓸 수 있는 API");
 });
-
-type Props = {
-  id?: number;
-  username: string;
-  password: string;
-  age?: number;
-  birthday?: Date;
-};
 
 app.post("/signup", async (req, res) => {
   const { username, password, age, birthday }: Props = req.body;
@@ -46,7 +37,7 @@ app.post("/signup", async (req, res) => {
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  const user = database.filter((user) => {
+  const user = database.filter((user: any) => {
     return user.username === username;
   });
   if (user.length === 0) {
