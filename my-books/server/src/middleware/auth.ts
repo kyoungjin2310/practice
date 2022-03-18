@@ -1,5 +1,6 @@
-const database = require("../data");
+import { database } from "../data";
 import * as jwt from "jsonwebtoken";
+import { Request, Response, NextFunction } from "express";
 
 declare module "jsonwebtoken" {
   export interface UserPayload extends jwt.JwtPayload {
@@ -7,7 +8,7 @@ declare module "jsonwebtoken" {
   }
 }
 
-export const validUser = (req, res, next) => {
+export const validUser = (req: Request, res: Response, next: NextFunction) => {
   const { access_token } = req.cookies;
   if (!access_token) {
     res.status(401).send("access token이 없습니다.");

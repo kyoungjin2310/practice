@@ -27,7 +27,7 @@ app.post("/signup", async (req, res) => {
     username,
     password: hash,
     age,
-    birthday,
+    birthday: birthday,
   });
 
   const access_token = jwt.sign({ username }, "secure");
