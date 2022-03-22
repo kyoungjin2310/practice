@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cookiesParser());
 app.use(express.urlencoded({ extended: false }));
 
-app.get("/users", (req, res) => {
+app.get("/books", (req, res) => {
   res.send(database);
 });
 
@@ -20,7 +20,7 @@ app.get("/secure_data", validUser, (req, res) => {
   res.send("인증된 사용자만 쓸 수 있는 API");
 });
 
-app.post("/signup", async (req, res) => {
+app.post("/register", async (req, res) => {
   const { username, password, age, birthday }: Props = req.body;
   const hash = await argon2.hash(password);
   database.push({
@@ -50,6 +50,6 @@ app.post("/login", async (req, res) => {
   res.send("로그인 성공!");
 });
 
-app.listen(3000, () => {
+app.listen(5000, () => {
   console.log("server on!");
 });
