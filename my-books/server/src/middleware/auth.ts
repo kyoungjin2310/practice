@@ -19,6 +19,8 @@ export const validUser = (req: Request, res: Response, next: NextFunction) => {
     if (!userInfo) {
       throw "user info가 없습니다";
     }
+    //03.23추가 - 삭제
+    res.send(access_token);
     next();
   } catch (e) {
     res.status(401).send("유효한 access token이 아닙니다.");
