@@ -6,11 +6,16 @@ import { validUser } from "./middleware/auth";
 
 import { database } from "./data";
 import { Props } from "./type";
+
 const app = express();
 
 app.use(express.json());
 app.use(cookiesParser());
 app.use(express.urlencoded({ extended: false }));
+
+const SECRET_KEY = "123456789";
+
+const expiresIn = "1h";
 
 app.get("/books", (req, res) => {
   res.send(database);
@@ -20,7 +25,7 @@ app.get("/secure_data", validUser, (req, res) => {
   res.send("인증된 사용자만 쓸 수 있는 API");
 });
 
-app.post("/register", async (req, res) => {
+app.post("/auth/register", async (req, res) => {
   const { username, password, age, birthday }: Props = req.body;
   const hash = await argon2.hash(password);
   database.push({
@@ -35,19 +40,31 @@ app.post("/register", async (req, res) => {
   res.send("success");
 });
 
-app.post("/login", async (req, res) => {
-  const { username, password } = req.body;
-  const user = database.filter((user: any) => {
-    return user.username === username;
-  });
-  if (user.length === 0) {
-    res.status(403).send("해당하는 id가 없습니다.");
-  }
+function isAuthenticated({ username, password }: any) {
+  return (
+    database.findIndex(
+      (user) => user.username === username && user.password === password
+    ) !== -1
+  );
+}
 
-  if (!(await argon2.verify(user[0].password, password))) {
-    res.status(403).send("패스워드가 틀립니다.");
+function createToken(payload: any) {
+  return jwt.sign(payload, SECRET_KEY, { expiresIn });
+}
+
+app.post("/auth/login", async (req, res) => {
+  console.log("login endpoint called; request body:");
+  console.log(req.body);
+  const { username, password } = req.body;
+  if (isAuthenticated({ username, password }) === false) {
+    const status = 401;
+    const message = "Incorrect email or password";
+    res.status(status).json({ status, message });
+    return;
   }
-  res.send("로그인 성공!");
+  const access_token = createToken({ username, password });
+  console.log("Access Token:" + access_token);
+  res.status(200).json({ access_token });
 });
 
 app.listen(5000, () => {
