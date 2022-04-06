@@ -3,6 +3,7 @@ import * as argon2 from "argon2";
 import jwt from "jsonwebtoken";
 import cookiesParser from "cookie-parser";
 import { validUser } from "./middleware/auth";
+import cors from "cors";
 
 import { database } from "./data";
 import { Props } from "./type";
@@ -12,6 +13,14 @@ const app = express();
 app.use(express.json());
 app.use(cookiesParser());
 app.use(express.urlencoded({ extended: false }));
+
+const corsOptions = {
+  origin: "*",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 
 const SECRET_KEY = "123456789";
 
@@ -39,6 +48,12 @@ app.post("/auth/register", async (req, res) => {
   console.log(access_token);
   res.send("success");
 });
+
+function verifyToken(token: any) {
+  return jwt.verify(token, SECRET_KEY, (err: any, decode: any) =>
+    decode !== undefined ? decode : err
+  );
+}
 
 function isAuthenticated({ username, password }: any) {
   return (
