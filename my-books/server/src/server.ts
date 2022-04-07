@@ -49,12 +49,6 @@ app.post("/auth/register", async (req, res) => {
   res.send("success");
 });
 
-function verifyToken(token: any) {
-  return jwt.verify(token, SECRET_KEY, (err: any, decode: any) =>
-    decode !== undefined ? decode : err
-  );
-}
-
 function isAuthenticated({ username, password }: any) {
   return (
     database.findIndex(
@@ -74,6 +68,7 @@ app.post("/auth/login", async (req, res) => {
   if (isAuthenticated({ username, password }) === false) {
     const status = 401;
     const message = "Incorrect email or password";
+    console.log(message);
     res.status(status).json({ status, message });
     return;
   }
