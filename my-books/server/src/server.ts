@@ -1,82 +1,146 @@
-import express from "express";
-import * as argon2 from "argon2";
+import fs from "fs";
+import bodyParser from "body-parser";
+import jsonServer from "json-server";
 import jwt from "jsonwebtoken";
-import cookiesParser from "cookie-parser";
-import { validUser } from "./middleware/auth";
-import cors from "cors";
 
-import { database } from "./data";
-import { Props } from "./type";
+const server = jsonServer.create();
+const router = jsonServer.router("./database.json");
+const userdb = JSON.parse(fs.readFileSync("./users.json", "utf-8"));
 
-const app = express();
-
-app.use(express.json());
-app.use(cookiesParser());
-app.use(express.urlencoded({ extended: false }));
-
-const corsOptions = {
-  origin: "*",
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
-};
-
-app.use(cors(corsOptions));
+server.use(bodyParser.urlencoded({ extended: true }));
+server.use(bodyParser.json());
+server.use(jsonServer.defaults());
 
 const SECRET_KEY = "123456789";
 
 const expiresIn = "1h";
 
-app.get("/books", (req, res) => {
-  res.send(database);
-});
+// Create a token from a payload
+function createToken(payload: string) {
+  return jwt.sign(payload, SECRET_KEY, { expiresIn });
+}
 
-app.get("/secure_data", validUser, (req, res) => {
-  res.send("인증된 사용자만 쓸 수 있는 API");
-});
+// Verify the token
+function verifyToken(token: string) {
+  return jwt.verify(token, SECRET_KEY, (err, decode) =>
+    decode !== undefined ? decode : err
+  );
+}
 
-app.post("/auth/register", async (req, res) => {
-  const { username, password, age, birthday }: Props = req.body;
-  const hash = await argon2.hash(password);
-  database.push({
-    username,
-    password: hash,
-    age,
-    birthday: birthday,
-  });
-
-  const access_token = jwt.sign({ username }, "secure");
-  console.log(access_token);
-  res.send("success");
-});
-
-function isAuthenticated({ username, password }: any) {
+// Check if the user exists in database
+// @ts-ignore
+function isAuthenticated({ email, password }) {
   return (
-    database.findIndex(
-      (user) => user.username === username && user.password === password
+    userdb.users.findIndex(
+      // @ts-ignore
+      (user) => user.email === email && user.password === password
     ) !== -1
   );
 }
 
-function createToken(payload: any) {
-  return jwt.sign(payload, SECRET_KEY, { expiresIn });
-}
+// Register New User
+server.post("/auth/register", (req, res) => {
+  console.log("register endpoint called; request body:");
+  console.log(req.body);
+  const { email, password } = req.body;
+  // @ts-ignore
+  if (isAuthenticated({ email, password }) === true) {
+    const status = 401;
+    const message = "Email and Password already exist";
+    res.status(status).json({ status, message });
+    return;
+  }
+  // @ts-ignore
+  fs.readFile("./users.json", (err, user) => {
+    if (err) {
+      const status = 401;
+      const message = err;
+      res.status(status).json({ status, message });
+      return;
+    }
 
-app.post("/auth/login", async (req, res) => {
+    // Get current users data
+    // @ts-ignore
+    let data = JSON.parse(user.toString());
+
+    // Get the id of last user
+    // @ts-ignore
+    let last_item_id = data.users[data.users.length - 1].id;
+
+    //Add new user
+    // @ts-ignore
+    data.users.push({ id: last_item_id + 1, email: email, password: password }); //add some data
+    let writeData = fs.writeFile(
+      "./users.json",
+      JSON.stringify(data),
+      // @ts-ignore
+      (err, result) => {
+        // WRITE
+        if (err) {
+          const status = 401;
+          const message = err;
+          res.status(status).json({ status, message });
+          return;
+        }
+      }
+    );
+  });
+
+  // Create token for new user
+  // @ts-ignore
+  const access_token = createToken({ email, password });
+  console.log("Access Token:" + access_token);
+  res.status(200).json({ access_token });
+});
+
+// Login to one of the users from ./users.json
+server.post("/auth/login", (req, res) => {
   console.log("login endpoint called; request body:");
   console.log(req.body);
-  const { username, password } = req.body;
-  if (isAuthenticated({ username, password }) === false) {
+  const { email, password } = req.body;
+
+  if (isAuthenticated({ email, password }) === false) {
     const status = 401;
     const message = "Incorrect email or password";
     console.log(message);
     res.status(status).json({ status, message });
     return;
   }
-  const access_token = createToken({ username, password });
+  // @ts-ignore
+  const access_token = createToken({ email, password });
   console.log("Access Token:" + access_token);
   res.status(200).json({ access_token });
 });
 
-app.listen(5000, () => {
-  console.log("server on!");
+server.use(/^(?!\/auth).*$/, (req, res, next) => {
+  if (
+    req.headers.authorization === undefined ||
+    req.headers.authorization.split(" ")[0] !== "Bearer"
+  ) {
+    const status = 401;
+    const message = "Error in authorization format";
+    res.status(status).json({ status, message });
+    return;
+  }
+  try {
+    let verifyTokenResult: any;
+    verifyTokenResult = verifyToken(req.headers.authorization.split(" ")[1]);
+
+    if (verifyTokenResult instanceof Error) {
+      const status = 401;
+      const message = "Access token not provided";
+      res.status(status).json({ status, message });
+      return;
+    }
+    next();
+  } catch (err) {
+    const status = 401;
+    const message = "Error access_token is revoked";
+    res.status(status).json({ status, message });
+  }
+});
+
+server.use(router);
+server.listen(5000, () => {
+  console.log("Running fake api json serve");
 });
