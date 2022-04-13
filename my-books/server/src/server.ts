@@ -14,6 +14,11 @@ server.use(jsonServer.defaults());
 const SECRET_KEY = "123456789";
 
 const expiresIn = "1h";
+declare module "jsonwebtoken" {
+  export interface UserPayload extends jwt.JwtPayload {
+    username: string;
+  }
+}
 
 // Create a token from a payload
 function createToken(payload: string) {
@@ -110,6 +115,25 @@ server.post("/auth/login", (req, res) => {
   const access_token = createToken({ email, password });
   console.log("Access Token:" + access_token);
   res.status(200).json({ access_token });
+});
+
+server.get("/books", (req, res, next) => {
+  const { access_token } = req.body;
+  if (!access_token) {
+    res.status(401).send("access token이 없습니다.");
+  }
+  try {
+    const { username } = <jwt.UserPayload>jwt.verify(access_token, "secure");
+    const userInfo = userdb.find((data: any) => data.username === username);
+    if (!userInfo) {
+      throw "user info가 없습니다";
+    }
+    //03.23추가 - 삭제
+    res.send(access_token);
+    next();
+  } catch (e) {
+    res.status(401).send("유효한 access token이 아닙니다.");
+  }
 });
 
 server.use(/^(?!\/auth).*$/, (req, res, next) => {
