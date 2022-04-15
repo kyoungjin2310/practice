@@ -117,7 +117,7 @@ server.post("/auth/login", (req, res) => {
   res.status(200).json({ access_token });
 });
 
-server.get("/books", (req, res, next) => {
+server.get("/books/:id", (req, res, next) => {
   const { access_token } = req.body;
   if (!access_token) {
     res.status(401).send("access token이 없습니다.");
