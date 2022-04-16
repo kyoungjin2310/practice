@@ -2,14 +2,16 @@ import fs from "fs";
 import bodyParser from "body-parser";
 import jsonServer from "json-server";
 import jwt from "jsonwebtoken";
+import cors from "cors";
 
 const server = jsonServer.create();
-const router = jsonServer.router("./database.json");
+//const router = jsonServer.router("./database.json");
 const userdb = JSON.parse(fs.readFileSync("./users.json", "utf-8"));
 
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
 server.use(jsonServer.defaults());
+server.use(cors({ origin: true, credentials: true }));
 
 const SECRET_KEY = "123456789";
 
@@ -117,8 +119,9 @@ server.post("/auth/login", (req, res) => {
   res.status(200).json({ access_token });
 });
 
-server.get("/books/:id", (req, res, next) => {
+server.get("/books", async (req, res) => {
   const { access_token } = req.body;
+  console.log(req.body);
   if (!access_token) {
     res.status(401).send("access token이 없습니다.");
   }
@@ -128,43 +131,42 @@ server.get("/books/:id", (req, res, next) => {
     if (!userInfo) {
       throw "user info가 없습니다";
     }
-    //03.23추가 - 삭제
-    res.send(access_token);
-    next();
+    console.log(userInfo);
+    res.status(200).json({ userInfo });
   } catch (e) {
     res.status(401).send("유효한 access token이 아닙니다.");
   }
 });
 
-server.use(/^(?!\/auth).*$/, (req, res, next) => {
-  if (
-    req.headers.authorization === undefined ||
-    req.headers.authorization.split(" ")[0] !== "Bearer"
-  ) {
-    const status = 401;
-    const message = "Error in authorization format";
-    res.status(status).json({ status, message });
-    return;
-  }
-  try {
-    let verifyTokenResult: any;
-    verifyTokenResult = verifyToken(req.headers.authorization.split(" ")[1]);
+// server.use(/^(?!\/auth).*$/, async (req, res, next) => {
+//   if (
+//     req.headers.authorization === undefined ||
+//     req.headers.authorization.split(" ")[0] !== "Bearer"
+//   ) {
+//     const status = 401;
+//     const message = "Error in authorization format";
+//     res.status(status).json({ status, message });
+//     return;
+//   }
+//   try {
+//     let verifyTokenResult: any;
+//     verifyTokenResult = verifyToken(req.headers.authorization.split(" ")[1]);
 
-    if (verifyTokenResult instanceof Error) {
-      const status = 401;
-      const message = "Access token not provided";
-      res.status(status).json({ status, message });
-      return;
-    }
-    next();
-  } catch (err) {
-    const status = 401;
-    const message = "Error access_token is revoked";
-    res.status(status).json({ status, message });
-  }
-});
+//     if (verifyTokenResult instanceof Error) {
+//       const status = 401;
+//       const message = "Access token not provided";
+//       res.status(status).json({ status, message });
+//       return;
+//     }
+//     next();
+//   } catch (err) {
+//     const status = 401;
+//     const message = "Error access_token is revoked";
+//     res.status(status).json({ status, message });
+//   }
+// });
 
-server.use(router);
+//server.use(router);
 server.listen(5000, () => {
   console.log("Running fake api json serve");
 });
