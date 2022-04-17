@@ -7,7 +7,7 @@ import cors from "cors";
 const server = jsonServer.create();
 //const router = jsonServer.router("./database.json");
 const userdb = JSON.parse(fs.readFileSync("./users.json", "utf-8"));
-
+const PORT = 5000;
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
 server.use(jsonServer.defaults());
@@ -123,17 +123,18 @@ server.get("/books", async (req, res) => {
   const { access_token } = req.body;
   console.log(req.body);
   if (!access_token) {
+    console.log("access token이 없습니다.");
     res.status(401).send("access token이 없습니다.");
   }
   try {
-    const { username } = <jwt.UserPayload>jwt.verify(access_token, "secure");
-    const userInfo = userdb.find((data: any) => data.username === username);
-    if (!userInfo) {
-      throw "user info가 없습니다";
-    }
-    console.log(userInfo);
-    res.status(200).json({ userInfo });
+    // const { username } = <jwt.UserPayload>jwt.verify(access_token, "secure");
+    // const userInfo = userdb.find((data: any) => data.username === username);
+    // if (!userInfo) {
+    //   throw "user info가 없습니다";
+    // }
+    // console.log(userInfo);
   } catch (e) {
+    console.log("유효한 access token이 아닙니다.");
     res.status(401).send("유효한 access token이 아닙니다.");
   }
 });
@@ -167,6 +168,6 @@ server.get("/books", async (req, res) => {
 // });
 
 //server.use(router);
-server.listen(5000, () => {
+server.listen(PORT, () => {
   console.log("Running fake api json serve");
 });
