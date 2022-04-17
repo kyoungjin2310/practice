@@ -27,12 +27,12 @@ function createToken(payload: string) {
   return jwt.sign(payload, SECRET_KEY, { expiresIn });
 }
 
-// Verify the token
-function verifyToken(token: string) {
-  return jwt.verify(token, SECRET_KEY, (err, decode) =>
-    decode !== undefined ? decode : err
-  );
-}
+// // Verify the token
+// function verifyToken(token: string) {
+//   return jwt.verify(token, SECRET_KEY, (err, decode) =>
+//     decode !== undefined ? decode : err
+//   );
+// }
 
 // Check if the user exists in database
 // @ts-ignore
@@ -119,24 +119,42 @@ server.post("/auth/login", (req, res) => {
   res.status(200).json({ access_token });
 });
 
-server.get("/books", async (req, res) => {
-  const { access_token } = req.body;
-  console.log(req.body);
-  if (!access_token) {
-    console.log("access token이 없습니다.");
-    res.status(401).send("access token이 없습니다.");
+//Verify Token
+// @ts-ignore
+function verifyToken(req, res, next) {
+  //Auth header value = > send token into header
+
+  const bearerHeader = req.headers["authorization"];
+  //check if bearer is undefined
+  if (typeof bearerHeader !== "undefined") {
+    //split the space at the bearer
+    const bearer = bearerHeader.split(" ");
+    //Get token from string
+    const bearerToken = bearer[1];
+
+    //set the token
+    req.token = bearerToken;
+
+    //next middleweare
+    next();
+  } else {
+    //Fobidden
+    res.sendStatus(403);
   }
-  try {
-    // const { username } = <jwt.UserPayload>jwt.verify(access_token, "secure");
-    // const userInfo = userdb.find((data: any) => data.username === username);
-    // if (!userInfo) {
-    //   throw "user info가 없습니다";
-    // }
-    // console.log(userInfo);
-  } catch (e) {
-    console.log("유효한 access token이 아닙니다.");
-    res.status(401).send("유효한 access token이 아닙니다.");
-  }
+}
+
+server.get("/books", verifyToken, (req, res) => {
+  // @ts-ignore
+  jwt.verify(req.token, SECRET_KEY, (err, authData) => {
+    if (err) res.sendStatus(403);
+    else {
+      console.log("로그인됨");
+      res.json({
+        message: "Welcome to Profile",
+        userData: authData,
+      });
+    }
+  });
 });
 
 // server.use(/^(?!\/auth).*$/, async (req, res, next) => {
