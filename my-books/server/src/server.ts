@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 import cors from "cors";
 
 const server = jsonServer.create();
-//const router = jsonServer.router("./database.json");
+const router = jsonServer.router("./database.json");
 const userdb = JSON.parse(fs.readFileSync("./users.json", "utf-8"));
 const PORT = 5000;
 server.use(bodyParser.urlencoded({ extended: true }));
@@ -150,13 +150,11 @@ server.get("/books", verifyToken, (req, res) => {
     else {
       const { email } = authData;
       const index = userdb.users.findIndex((user: any) => user.email === email);
-      const userindex = userdb.users[index];
+      const userIndex = userdb.users[index];
       console.log("로그인됨");
-      console.log(userindex.books);
-      res.json({
-        message: "Welcome to books",
-        books: userindex.books,
-      });
+      const { books } = userIndex;
+      console.log(books);
+      res.json(books);
     }
   });
 });
