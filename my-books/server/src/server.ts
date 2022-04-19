@@ -148,42 +148,18 @@ server.get("/books", verifyToken, (req, res) => {
   jwt.verify(req.token, SECRET_KEY, (err, authData) => {
     if (err) res.sendStatus(403);
     else {
+      const { email } = authData;
+      const index = userdb.users.findIndex((user: any) => user.email === email);
+      const userindex = userdb.users[index];
       console.log("로그인됨");
+      console.log(userindex.books);
       res.json({
-        message: "Welcome to Profile",
-        userData: authData,
+        message: "Welcome to books",
+        books: userindex.books,
       });
     }
   });
 });
-
-// server.use(/^(?!\/auth).*$/, async (req, res, next) => {
-//   if (
-//     req.headers.authorization === undefined ||
-//     req.headers.authorization.split(" ")[0] !== "Bearer"
-//   ) {
-//     const status = 401;
-//     const message = "Error in authorization format";
-//     res.status(status).json({ status, message });
-//     return;
-//   }
-//   try {
-//     let verifyTokenResult: any;
-//     verifyTokenResult = verifyToken(req.headers.authorization.split(" ")[1]);
-
-//     if (verifyTokenResult instanceof Error) {
-//       const status = 401;
-//       const message = "Access token not provided";
-//       res.status(status).json({ status, message });
-//       return;
-//     }
-//     next();
-//   } catch (err) {
-//     const status = 401;
-//     const message = "Error access_token is revoked";
-//     res.status(status).json({ status, message });
-//   }
-// });
 
 //server.use(router);
 server.listen(PORT, () => {
