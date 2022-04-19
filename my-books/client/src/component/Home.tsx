@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   const isLoginTrue = JSON.parse(localStorage.getItem("login") || "{}");
-
   const userNotLogin = () => (
     <>
       <h2>It seem's like you are not login</h2>
