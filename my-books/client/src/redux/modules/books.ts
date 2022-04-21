@@ -53,6 +53,6 @@ function* getBooksSaga() {
   }
 }
 
-export function* booksSage() {
+export function* booksSaga() {
   yield takeLatest(`${prefix}/GET_BOOKS`, getBooksSaga);
 }
