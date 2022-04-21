@@ -4,7 +4,7 @@ import Add from "./pages/Add";
 import Detail from "./pages/Detail";
 import Edit from "./pages/Edit";
 import Home from "./pages/Home";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import SignIn from "./pages/SignIn";
 import Error from "./pages/Error";

@@ -57,7 +57,7 @@ function* loginSaga(action: Action<LoginReqType>) {
     yield put(success(token));
     yield put(push("/"));
   } catch (error: any) {
-    yield put(fail(new Error(error?.response?.data.error || "Error")));
+    yield put(fail(new Error(error?.response?.data?.error || "Error")));
   }
 }
 function* logoutSaga() {
