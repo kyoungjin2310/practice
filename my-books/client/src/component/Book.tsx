@@ -1,17 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { BookOutlined } from "@ant-design/icons";
-type BookProps = {
-  bookId: number;
-  title: string;
-};
+import { BookType } from "../type";
 
-const Book: React.FC<BookProps> = ({ bookId, title }) => {
+interface BookProps extends BookType {}
+
+const Book: React.FC<BookProps> = ({ bookId, title, author }) => {
   return (
     <div>
-      <Link to={`/book/${bookId}`}>
-        <BookOutlined>{title}</BookOutlined>
-      </Link>
+      <div>
+        <Link to={`/book/${bookId}`}>
+          <BookOutlined>{title}</BookOutlined>
+        </Link>
+      </div>
+      <div>
+        <Link to={`/book/${bookId}`}>{author}</Link>
+      </div>
+      <div></div>
     </div>
   );
 };
