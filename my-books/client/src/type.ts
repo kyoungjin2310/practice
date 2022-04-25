@@ -12,16 +12,16 @@ export type AuthState = {
   error: Error | null;
 };
 
-export interface BooksState {
+export type BooksState = {
   books: BookType[] | null;
   loading: boolean;
   error: Error | null;
-}
+};
 
-export interface RootState {
+export type RootState = {
   auth: AuthState;
   books: BooksState;
   router: Reducer<RouterState<unknown>, AnyAction>;
-}
+};
 
-export interface BookType {}
+export type BookType = {};

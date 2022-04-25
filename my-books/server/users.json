@@ -4,7 +4,16 @@
       "id": 1,
       "email": "vishal@gmail.com",
       "password": "12345678",
-      "books": ["book1", "book2"]
+      "books": [
+        {
+          "bookId": "4795",
+          "ownerId": "aaaawwwww",
+          "title": "리액트 정복하기",
+          "message": "리액트 설명 리액트 설명 리액트 설명 리액트 설명",
+          "author": "홍길동",
+          "url": "http://localhost:5000/"
+        }
+      ]
     },
     { "id": 2, "email": "vishal1@gmail.com", "password": "12345678" },
     { "id": 3, "email": "vishal2@gmail.com", "password": "12345678" },
