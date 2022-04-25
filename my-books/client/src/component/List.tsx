@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Button, PageHeader, Table } from "antd";
 import { BookType } from "../type";
 import Layout from "./Layout";
+import Book from "./Book";
 
 type ListProps = {
   books: BookType[] | null;
@@ -31,13 +32,13 @@ const List: React.FC<ListProps> = ({ books, loading, getBooks }) => {
         ]}
       ></PageHeader>
       <Table
-        dataSource={[]}
+        dataSource={books || []}
         columns={[
           {
             title: "Book",
             dataIndex: "book",
             key: "book",
-            render: () => <div>book</div>,
+            render: (text, recode) => <Book {...recode} />,
           },
         ]}
         loading={books === null || loading}
