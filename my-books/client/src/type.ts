@@ -28,4 +28,6 @@ export type BookType = {
   bookId: number;
   title: string;
   author: string;
+  createdAt: string;
+  url: string;
 };
