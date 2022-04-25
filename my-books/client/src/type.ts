@@ -24,4 +24,8 @@ export type RootState = {
   router: Reducer<RouterState<unknown>, AnyAction>;
 };
 
-export type BookType = {};
+export type BookType = {
+  bookId: number;
+  title: string;
+  author: string;
+};
