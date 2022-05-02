@@ -24,6 +24,7 @@ const List: React.FC<ListProps> = ({
 
   useEffect(() => {
     getBooks();
+    console.log(books);
   }, [getBooks]);
 
   useEffect(() => {

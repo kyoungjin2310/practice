@@ -10,9 +10,6 @@ import SignIn from "./pages/SignIn";
 import Error from "./pages/Error";
 import { ConnectedRouter } from "connected-react-router";
 import history from "./history";
-import Header from "./component/Header";
-import Login from "./component/Login";
-import Register from "./component/Register";
 
 function App() {
   return (

@@ -154,7 +154,7 @@ server.get("/books", verifyToken, (req, res) => {
       console.log("로그인됨");
       const { books } = userIndex;
       console.log(books);
-      res.json(books);
+      res.json({ books });
     }
   });
 });

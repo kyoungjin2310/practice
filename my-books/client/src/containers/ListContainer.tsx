@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import List from "../component/List";
 import { BookType, RootState } from "../type";
@@ -23,7 +23,7 @@ const ListContainer = () => {
   }, [dispatch]);
 
   const logout = useCallback(() => {
-    dispatch(logoutSagaStart);
+    dispatch(logoutSagaStart());
   }, [dispatch]);
 
   return (
